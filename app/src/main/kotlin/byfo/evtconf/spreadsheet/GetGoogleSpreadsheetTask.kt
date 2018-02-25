@@ -19,16 +19,15 @@ import java.net.URL
 class GetGoogleSpreadsheetTask(val context: Context, val view: ListView) : AsyncTask<URL, Int, List<Entry>>() {
 
     private val TAG = "DownstreamTask"
+    private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
 
 
     override fun doInBackground(vararg urls: URL): List<Entry>? {
 
-        val url = urls[0].toURI()
-
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(StringHttpMessageConverter())
 
-        val response = restTemplate.getForObject(url, String::class.java)
+        val response = restTemplate.getForObject(URL, String::class.java)
 
         val jsonResponse = JSONObject(response)
         Log.d(TAG, response.toString())

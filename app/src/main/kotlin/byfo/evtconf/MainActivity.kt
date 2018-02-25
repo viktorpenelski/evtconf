@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,22 +17,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val listView = findViewById<ListView>(R.id.list_view)
-        val url = URL("https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json")
 
         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
 
             override fun onItemClick(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
                 val intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                intent.putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
+                intent.putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
+                intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
 
                 startActivity(intent)
 
-
-//                GetGoogleSpreadsheetTask(this@MainActivity, listView).execute(url)
                 Log.d("kappa", "AdapterView<*>: $arg0 \n View: $arg1 \n Int: $arg2 \n Long: $arg3")
             }
         }
 
-        GetGoogleSpreadsheetTask(this, listView).execute(url)
+        GetGoogleSpreadsheetTask(this, listView).execute()
     }
+
 
 }
