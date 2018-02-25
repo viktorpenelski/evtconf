@@ -21,8 +21,13 @@ but will definitely be planned for in the future.
 * Dynamically create list from all information taken from above
   * ~~MVP: listview of text only~~
   * Cached picture + text, linkable to detailed info / outside link?
-  
-* OPEN Question: when should we update? (per x minute? per )
+
+* Highlight current event (time based)
+  * optional - show info about bracket on home screen?
+
+* Event banner on top
+
+* OPEN Question: when should we update? (per x minute? after device sleep? )
     
 * Figure out branding - dynamic? custom per release?
 * Release to PlayStore
@@ -35,3 +40,4 @@ but will definitely be planned for in the future.
     * About the team?
     * opt-in rewards?
     * scavenge hunt (QR codes)
+  * incoming match

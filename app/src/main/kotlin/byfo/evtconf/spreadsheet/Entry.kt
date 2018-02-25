@@ -15,7 +15,7 @@ data class Entry(val title: String, val time: String, val picture: String) {
      * @return true if both title and time are empty strings.
      */
     fun isEmpty() : Boolean {
-        return title.isEmpty() && time.isEmpty()
+        return title.isEmpty() || time.isEmpty()
     }
 
     companion object {
