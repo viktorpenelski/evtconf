@@ -1,10 +1,9 @@
 package byfo.evtconf.spreadsheet
 
-import android.R
+import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import org.json.JSONArray
 import org.json.JSONObject
@@ -49,10 +48,11 @@ class GetGoogleSpreadsheetTask(val context: Context, val view: ListView) : Async
 
         val list = result
                 .filter { !it.isEmpty() }
-                .map { it -> "${it.time} - ${it.title}" }
                 .toList()
 
-        val adapter = ArrayAdapter<String>(context, R.layout.simple_list_item_1, list)
+
+        val adapter = EntryListAdapter(context as Activity, list)
+
         view.adapter = adapter
     }
 

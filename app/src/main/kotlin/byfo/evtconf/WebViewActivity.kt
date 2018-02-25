@@ -14,18 +14,19 @@ class WebViewActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val webView = findViewById<WebView>(R.id.webview1)
+        //TODO(vic) webView needs to be scrollable.
+        val webView = findViewById<WebView>(R.id.webview)
 
         webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String) : Boolean {
-                view.loadUrl(url)
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String) : Boolean {
+                view?.loadUrl(url)
                 return true
             }
         }
 
         webView.settings.javaScriptEnabled = true
         //TODO(vic) this needs to be dynamic, taken from a field in Entry
-        webView.loadUrl("https://battlefy.com/naow-tourneys/naow-premier/5a78e6dea772d8038f474a65/info?infoTab=rules")
+        webView.loadUrl("https://www.toornament.com/tournaments/1200127112880726016/information")
 
 
 
