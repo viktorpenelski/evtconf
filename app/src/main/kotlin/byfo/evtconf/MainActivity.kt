@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import byfo.evtconf.spreadsheet.Entry
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 
 
@@ -20,19 +21,35 @@ class MainActivity : AppCompatActivity() {
 
         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
 
-            override fun onItemClick(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
-                val intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                intent.putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
-                intent.putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
-                intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+            override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
+                GetGoogleSpreadsheetTask(this@MainActivity, listView).execute()
 
-                startActivity(intent)
+                val entryClicked = adapter.getItemAtPosition(position) as Entry
+                loadExternalUrlWebView(entryClicked.redirectUrl)
 
-                Log.d("kappa", "AdapterView<*>: $arg0 \n View: $arg1 \n Int: $arg2 \n Long: $arg3")
+                Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
             }
         }
 
         GetGoogleSpreadsheetTask(this, listView).execute()
+    }
+
+    fun loadTwitchChatWebView(view: View) {
+        val intent = Intent(this@MainActivity, WebViewActivity::class.java)
+        intent.putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
+        intent.putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
+        intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+
+        startActivity(intent)
+
+    }
+
+    private fun loadExternalUrlWebView(url: String) {
+        val intent = Intent(this@MainActivity, WebViewActivity::class.java)
+        intent.putExtra(WebViewActivity.EXTRAS_URL, url)
+        intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+
+        startActivity(intent)
     }
 
 

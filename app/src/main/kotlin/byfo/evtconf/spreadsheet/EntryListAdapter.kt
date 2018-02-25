@@ -16,13 +16,8 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
     : BaseAdapter() {
 
     private class ViewHolder(row: View?) {
-        var txtTime: TextView? = null
-        var txtTitle: TextView? = null
-
-        init {
-            this.txtTime = row?.findViewById<TextView>(R.id.txtTime)
-            this.txtTitle = row?.findViewById<TextView>(R.id.txtTitle)
-        }
+        var txtTime: TextView? = row?.findViewById<TextView>(R.id.txtTime)
+        var txtTitle: TextView? = row?.findViewById<TextView>(R.id.txtTitle)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -56,5 +51,6 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
     override fun getCount(): Int {
         return entries.size
     }
+
 
 }

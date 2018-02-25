@@ -6,7 +6,7 @@ import org.json.JSONException
 /**
  * Created by Viktor on 2/25/2018.
  */
-data class Entry(val title: String, val time: String, val picture: String) {
+data class Entry(val title: String, val time: String, val picture: String, val redirectUrl: String) {
 
     /**
      * an Entry is considered "empty" when either one of the elements that it cannot be used without -
@@ -20,6 +20,13 @@ data class Entry(val title: String, val time: String, val picture: String) {
 
     companion object {
 
+        private const val TITLE = "gsx\$title"
+        private const val TIME = "gsx\$time"
+        private const val PICTURE = "gsx\$picture"
+        private const val LINK = "gsx\$url"
+
+        private const val VALUE = "\$t"
+
         /**
          * Serialize an Entry from given JSONObject.
          * This JSONObject has to follow google sheet's API.
@@ -30,12 +37,13 @@ data class Entry(val title: String, val time: String, val picture: String) {
         fun fromJSONObject(obj: org.json.JSONObject) : Entry {
             return try {
                 Entry(
-                        obj.getJSONObject("gsx\$title").getString("\$t") ,
-                        obj.getJSONObject("gsx\$time").getString("\$t"),
-                        obj.getJSONObject("gsx\$picture").getString("\$t"))
+                        obj.getJSONObject(TITLE).getString(VALUE) ,
+                        obj.getJSONObject(TIME).getString(VALUE),
+                        obj.getJSONObject(PICTURE).getString(VALUE),
+                        obj.getJSONObject(LINK).getString(VALUE))
             } catch (e: JSONException) {
                 Log.e("EntrySerialization", "Something went wrong during deserialization of remote json - ${e.stackTrace}")
-                Entry("", "", "")
+                Entry("", "", "", "")
             }
         }
     }
