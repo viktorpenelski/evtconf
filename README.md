@@ -15,11 +15,23 @@ and/or having a backend should there be a need, will not be part of the initial 
 but will definitely be planned for in the future.
 
 ### TODO:
-* Call google spreadsheet
-  * parse result into usable information
+* ~~Call google spreadsheet~~
+  * ~~parse result into usable information~~
 
 * Dynamically create list from all information taken from above
-  * (MVP: listview of text only, nice to have: cached picture + text, linkable to detailed info)
+  * ~~MVP: listview of text only~~
+  * Cached picture + text, linkable to detailed info / outside link?
   
+* OPEN Question: when should we update? (per x minute? per )
+    
+* Figure out branding - dynamic? custom per release?
 * Release to PlayStore
 * Figure out QR code installation of the app
+
+* Feature wishlist
+  * Figure out what information to expand upon click of Events
+  * Additional screens
+    * chat (twitch chat?)
+    * About the team?
+    * opt-in rewards?
+    * scavenge hunt (QR codes)

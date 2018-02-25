@@ -9,7 +9,7 @@ import org.json.JSONException
 data class Entry(val title: String, val time: String, val picture: String) {
 
     /**
-     * an Entry is considered "empty" when either one of the elements that it cannot be used with -
+     * an Entry is considered "empty" when either one of the elements that it cannot be used without -
      * title or time, is an empty string.
      *
      * @return true if both title and time are empty strings.

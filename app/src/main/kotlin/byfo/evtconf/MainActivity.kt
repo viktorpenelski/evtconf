@@ -1,5 +1,6 @@
 package byfo.evtconf
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -22,7 +23,12 @@ class MainActivity : AppCompatActivity() {
         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
 
             override fun onItemClick(arg0: AdapterView<*>, arg1: View, arg2: Int, arg3: Long) {
-                GetGoogleSpreadsheetTask(this@MainActivity, listView).execute(url)
+                val intent = Intent(this@MainActivity, WebViewActivity::class.java)
+
+                startActivity(intent)
+
+
+//                GetGoogleSpreadsheetTask(this@MainActivity, listView).execute(url)
                 Log.d("kappa", "AdapterView<*>: $arg0 \n View: $arg1 \n Int: $arg2 \n Long: $arg3")
             }
         }
