@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     tools:context="byfo.evtconf.MainActivity">
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/webview" />
-
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
