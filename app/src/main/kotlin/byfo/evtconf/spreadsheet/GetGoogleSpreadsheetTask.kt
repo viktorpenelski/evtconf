@@ -1,10 +1,8 @@
 package byfo.evtconf.spreadsheet
 
-import android.app.Activity
-import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import android.widget.ListView
+import byfo.evtconf.OnFetched
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.http.converter.StringHttpMessageConverter
@@ -16,7 +14,7 @@ import java.net.URL
  * Created by Vic on 2/24/2018.
  */
 
-class GetGoogleSpreadsheetTask(val context: Context, val view: ListView) : AsyncTask<URL, Int, List<Entry>>() {
+class GetGoogleSpreadsheetTask(private val onEntry : OnFetched) : AsyncTask<URL, Int, List<Entry>>() {
 
     private val TAG = "DownstreamTask"
     private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
@@ -49,10 +47,7 @@ class GetGoogleSpreadsheetTask(val context: Context, val view: ListView) : Async
                 .filter { !it.isEmpty() }
                 .toList()
 
-
-        val adapter = EntryListAdapter(context as Activity, list)
-
-        view.adapter = adapter
+        onEntry.onEntries(list)
     }
 
     /**

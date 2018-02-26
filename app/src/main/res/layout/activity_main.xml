@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,26 +9,47 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons" />
-<!--TODO(vic): align the ListView so that it ends on top of buttons. Buttons can have fixed size-->
-    <RelativeLayout
-        android:id="@+id/buttons"
+        android:layout_above="@id/button_container"
+        android:orientation="vertical" />
+    <!--TODO(vic): align the ListView so that it ends on top of buttons. Buttons can have fixed size-->
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="0.9"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toBottomOf="@id/list_view"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/twitch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/twitchtv_logo"
+            android:contentDescription="Twitch Chat"
+            android:onClick="loadTwitchChatWebView" />
+
+        <ImageButton
+            android:id="@+id/twitch_button_2"
+            android:layout_weight="0.3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/twitchtv_logo"
             android:contentDescription="Twitch Chat"
             android:onClick="loadTwitchChatWebView" />
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/twitch_button_3"
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/twitchtv_logo"
+            android:contentDescription="Twitch Chat"
+            android:onClick="loadTwitchChatWebView" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
