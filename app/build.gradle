@@ -22,7 +22,7 @@ android {
     }
 }
 
-sourceSets{ main.java.srcDirs += 'src/main/kotlin' }
+sourceSets{ main.java.srcDirs += 'src/main/java' }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -2,7 +2,6 @@ package byfo.evtconf.spreadsheet
 
 import android.os.AsyncTask
 import android.util.Log
-import byfo.evtconf.OnFetched
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.http.converter.StringHttpMessageConverter
@@ -47,7 +46,7 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched) : AsyncTask<URL,
                 .filter { !it.isEmpty() }
                 .toList()
 
-        onEntry.onEntries(list)
+        onEntry.onEntriesFetched(list)
     }
 
     /**
@@ -61,5 +60,9 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched) : AsyncTask<URL,
             .asSequence()
             .map { get(it) as JSONObject }
             .iterator()
+}
+
+interface OnFetched {
+    fun onEntriesFetched(entries: List<Entry>)
 }
 

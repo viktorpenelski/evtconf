@@ -11,10 +11,7 @@ import android.widget.ListView
 import byfo.evtconf.spreadsheet.Entry
 import byfo.evtconf.spreadsheet.EntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
-
-interface OnFetched {
-    fun onEntries(entries: List<Entry>)
-}
+import byfo.evtconf.spreadsheet.OnFetched
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         GetGoogleSpreadsheetTask(object : OnFetched {
-            override fun onEntries(entries: List<Entry>) {
+            override fun onEntriesFetched(entries: List<Entry>) {
                 listView.adapter = EntryListAdapter(this@MainActivity as Activity, entries)
             }
         }).execute()
