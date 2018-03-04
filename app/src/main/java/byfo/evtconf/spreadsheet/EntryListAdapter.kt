@@ -2,12 +2,15 @@ package byfo.evtconf.spreadsheet
 
 import android.app.Activity
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import byfo.evtconf.R
+import com.facebook.drawee.view.SimpleDraweeView
+
 
 /**
  * Created by Vic on 2/25/2018.
@@ -18,6 +21,7 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
     private class ViewHolder(row: View?) {
         var txtTime: TextView? = row?.findViewById<TextView>(R.id.txtTime)
         var txtTitle: TextView? = row?.findViewById<TextView>(R.id.txtTitle)
+        var imgLogo: SimpleDraweeView? = row?.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -33,9 +37,17 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
             viewHolder = view.tag as ViewHolder
         }
 
+
         val entry = entries[position]
         viewHolder.txtTime?.text = entry.time
         viewHolder.txtTitle?.text = entry.title
+
+        if (entry.picture.isNotBlank()) {
+            val uri = Uri.parse(entry.picture)
+            viewHolder.imgLogo?.setImageURI(uri)
+        } else {
+            viewHolder.imgLogo?.setActualImageResource(R.drawable.gplaytvlogo)
+        }
 
         return view as View
     }

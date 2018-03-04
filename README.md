@@ -18,23 +18,27 @@ but will definitely be planned for in the future.
 * ~~Call google spreadsheet~~
   * ~~parse result into usable information~~
 
-* Dynamically create list from all information taken from above
+* ~~Dynamically create list from all information taken from above~~
   * ~~MVP: listview of text only~~
-  * Cached picture + text, linkable to detailed info / outside link?
+  * ~~Cached picture + text, linkable to detailed info / outside link?~~
+  
+* Extract hard-coded variables into properties
+
+* Event banner on top
+
+* Release to PlayStore
+* Figure out QR code installation of the app
+
+### Ideas / open questions:
 
 * Highlight current event (time based)
   * optional - show info about bracket on home screen?
 
-* Event banner on top
-
-* OPEN Question: when should we update? (per x minute? after device sleep? )
+* Q: when should we update? (per x minute? after device sleep? )
     
 * Figure out branding - dynamic? custom per release?
-* Release to PlayStore
-* Figure out QR code installation of the app
 
 * Feature wishlist
-  * Figure out what information to expand upon click of Events
   * Additional screens
     * chat (twitch chat?)
     * About the team?

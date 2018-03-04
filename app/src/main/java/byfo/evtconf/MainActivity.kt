@@ -13,6 +13,7 @@ import byfo.evtconf.spreadsheet.EntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import byfo.evtconf.spreadsheet.OnFetched
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
 
             override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
-//                GetGoogleSpreadsheetTask(this@MainActivity, listView).execute()
 
                 val entryClicked = adapter.getItemAtPosition(position) as Entry
                 loadExternalUrlWebView(entryClicked.redirectUrl)
@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
                 listView.adapter = EntryListAdapter(this@MainActivity as Activity, entries)
             }
         }).execute()
+
+
     }
 
     fun loadTwitchChatWebView(view: View) {

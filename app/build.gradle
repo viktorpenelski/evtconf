@@ -33,6 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    implementation 'com.facebook.fresco:fresco:1.8.1'
 }
 
 repositories {
