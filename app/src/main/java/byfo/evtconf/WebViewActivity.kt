@@ -14,29 +14,29 @@ class WebViewActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.webview)
 
-        val webView = initializeWebView()
-        webView.loadUrl(intent.extras.getString(EXTRAS_URL))
+        initializeWebView().apply {
+            loadUrl(intent.extras.getString(EXTRAS_URL))
+        }
     }
 
     /**
      * Initialize the web view, taking extras into account for configuration purposes.
      */
-    private fun initializeWebView() : WebView{
-        val webView = findViewById<WebView>(R.id.webview)
+    private fun initializeWebView(): WebView {
 
-        if (intent.extras.getBoolean(EXTRAS_REQUEST_DESKTOP, false)) {
-            webView.settings.userAgentString =  "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
-        }
-        webView.settings.javaScriptEnabled = intent.extras.getBoolean(EXTRAS_ENABLE_JS, false)
+        return findViewById<WebView>(R.id.webview).also {
+            if (intent.extras.getBoolean(EXTRAS_REQUEST_DESKTOP, false)) {
+                it.settings.userAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
+            }
+            it.settings.javaScriptEnabled = intent.extras.getBoolean(EXTRAS_ENABLE_JS, false)
 
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String) : Boolean {
-                view?.loadUrl(url)
-                return true
+            it.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
+                    view?.loadUrl(url)
+                    return true
+                }
             }
         }
-
-        return webView
     }
 
     companion object {

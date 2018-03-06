@@ -43,19 +43,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadTwitchChatWebView(view: View) {
-        val intent = Intent(this@MainActivity, WebViewActivity::class.java)
-        intent.putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
-        intent.putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
-        intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+        val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
+            putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
+            putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+        }
 
         startActivity(intent)
-
     }
 
     private fun loadExternalUrlWebView(url: String) {
-        val intent = Intent(this@MainActivity, WebViewActivity::class.java)
-        intent.putExtra(WebViewActivity.EXTRAS_URL, url)
-        intent.putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+        val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.EXTRAS_URL, url)
+            putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
+        }
 
         startActivity(intent)
     }

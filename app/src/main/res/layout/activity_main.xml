@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     tools:context="byfo.evtconf.MainActivity">
 
-        <ListView
-        android:id="@+id/list_view"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button_container"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:layout_above="@id/button_container">
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/button_container"
@@ -26,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:background="@drawable/twitchtv_logo"
-            android:contentDescription="Twitch Chat"
+            android:contentDescription="@string/twitch_button"
             android:onClick="loadTwitchChatWebView" />
 
     </LinearLayout>

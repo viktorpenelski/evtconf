@@ -21,6 +21,11 @@ but will definitely be planned for in the future.
 * ~~Dynamically create list from all information taken from above~~
   * ~~MVP: listview of text only~~
   * ~~Cached picture + text, linkable to detailed info / outside link?~~
+
+* add second screen, slidable from first
+  * for now content of the screen should be larger images that link to webview
+
+* implement swipe up to refresh
   
 * Extract hard-coded variables into properties
 

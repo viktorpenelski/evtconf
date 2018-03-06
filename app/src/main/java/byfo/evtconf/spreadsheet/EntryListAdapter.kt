@@ -27,6 +27,7 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View?
         val viewHolder: ViewHolder
+
         if (convertView == null) {
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.entry_list_row, parent, false)
@@ -37,16 +38,15 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
             viewHolder = view.tag as ViewHolder
         }
 
+        entries[position].let {
+            viewHolder.txtTime?.text = it.time
+            viewHolder.txtTitle?.text = it.title
 
-        val entry = entries[position]
-        viewHolder.txtTime?.text = entry.time
-        viewHolder.txtTitle?.text = entry.title
-
-        if (entry.picture.isNotBlank()) {
-            val uri = Uri.parse(entry.picture)
-            viewHolder.imgLogo?.setImageURI(uri)
-        } else {
-            viewHolder.imgLogo?.setActualImageResource(R.drawable.gplaytvlogo)
+            if (it.picture.isNotBlank()) {
+                viewHolder.imgLogo?.setImageURI(Uri.parse(it.picture))
+            } else {
+                viewHolder.imgLogo?.setActualImageResource(R.drawable.gplaytvlogo)
+            }
         }
 
         return view as View
