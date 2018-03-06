@@ -25,7 +25,7 @@ but will definitely be planned for in the future.
 * add second screen, slidable from first
   * for now content of the screen should be larger images that link to webview
 
-* implement swipe up to refresh
+* ~~implement swipe up to refresh~~
   
 * Extract hard-coded variables into properties
 

@@ -3,6 +3,7 @@ package byfo.evtconf
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -18,28 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
-
-        val listView = findViewById<ListView>(R.id.list_view)
-
-        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
-
-            override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
-
-                val entryClicked = adapter.getItemAtPosition(position) as Entry
-                loadExternalUrlWebView(entryClicked.redirectUrl)
-
-                Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
-            }
-        }
-
-        GetGoogleSpreadsheetTask(object : OnFetched {
-            override fun onEntriesFetched(entries: List<Entry>) {
-                listView.adapter = EntryListAdapter(this@MainActivity as Activity, entries)
-            }
-        }).execute()
-
-
+        initializeListViewOnItemClickListener()
+        initializeSwipeToRefresh()
+        loadListView()
     }
 
     fun loadTwitchChatWebView(view: View) {
@@ -50,6 +34,50 @@ class MainActivity : AppCompatActivity() {
         }
 
         startActivity(intent)
+    }
+
+    private fun initializeListViewOnItemClickListener() {
+        findViewById<ListView>(R.id.list_view).apply {
+            onItemClickListener = object : AdapterView.OnItemClickListener {
+
+                override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
+
+                    val entryClicked = adapter.getItemAtPosition(position) as Entry
+                    loadExternalUrlWebView(entryClicked.redirectUrl)
+
+                    Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
+                }
+            }
+        }
+    }
+
+    private fun initializeSwipeToRefresh() {
+        findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+
+            /*
+             * Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
+             * performs a swipe-to-refresh gesture.
+             */
+            setOnRefreshListener {
+                Log.i("MAIN", "onRefresh called from SwipeRefreshLayout")
+                loadListView()
+            }
+        }
+    }
+
+    private fun loadListView() {
+        GetGoogleSpreadsheetTask(object : OnFetched {
+            override fun onEntriesFetched(entries: List<Entry>) {
+                findViewById<ListView>(R.id.list_view).apply {
+                    adapter = EntryListAdapter(this@MainActivity as Activity, entries)
+                }
+            }
+        }).execute()
+
+        findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+            isRefreshing = false
+        }
+
     }
 
     private fun loadExternalUrlWebView(url: String) {
