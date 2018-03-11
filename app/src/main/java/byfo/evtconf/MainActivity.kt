@@ -1,18 +1,10 @@
 package byfo.evtconf
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
-import byfo.evtconf.spreadsheet.Entry
-import byfo.evtconf.spreadsheet.EntryListAdapter
-import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
-import byfo.evtconf.spreadsheet.OnFetched
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,73 +12,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Set the content of the activity to use the  activity_main.xml layout file
         setContentView(R.layout.activity_main)
-        initializeListViewOnItemClickListener()
-        initializeSwipeToRefresh()
-        loadListView()
+
+        // Find the view pager that will allow the user to swipe between fragments
+        val viewPager = findViewById<View>(R.id.viewpager) as ViewPager
+
+        // Create an adapter that knows which fragment should be shown on each page
+        val adapter = SimpleFragmentPagerAdapter(this, supportFragmentManager)
+
+        // Set the adapter onto the view pager
+        viewPager.adapter = adapter
+
+        // Give the TabLayout the ViewPager
+        val tabLayout = findViewById<View>(R.id.sliding_tabs) as TabLayout
+        tabLayout.setupWithViewPager(viewPager)
     }
-
-    fun loadTwitchChatWebView(view: View) {
-        val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
-            putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
-            putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
-            putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
-        }
-
-        startActivity(intent)
-    }
-
-    private fun initializeListViewOnItemClickListener() {
-        findViewById<ListView>(R.id.list_view).apply {
-            onItemClickListener = object : AdapterView.OnItemClickListener {
-
-                override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
-
-                    val entryClicked = adapter.getItemAtPosition(position) as Entry
-                    loadExternalUrlWebView(entryClicked.redirectUrl)
-
-                    Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
-                }
-            }
-        }
-    }
-
-    private fun initializeSwipeToRefresh() {
-        findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
-
-            /*
-             * Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
-             * performs a swipe-to-refresh gesture.
-             */
-            setOnRefreshListener {
-                Log.i("MAIN", "onRefresh called from SwipeRefreshLayout")
-                loadListView()
-            }
-        }
-    }
-
-    private fun loadListView() {
-        GetGoogleSpreadsheetTask(object : OnFetched {
-            override fun onEntriesFetched(entries: List<Entry>) {
-                findViewById<ListView>(R.id.list_view).apply {
-                    adapter = EntryListAdapter(this@MainActivity as Activity, entries)
-                }
-            }
-        }).execute()
-
-        findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
-            isRefreshing = false
-        }
-
-    }
-
-    private fun loadExternalUrlWebView(url: String) {
-        val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
-            putExtra(WebViewActivity.EXTRAS_URL, url)
-            putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
-        }
-
-        startActivity(intent)
-    }
-
 }
