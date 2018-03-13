@@ -22,20 +22,6 @@ import byfo.evtconf.spreadsheet.OnFetched
  */
 class UsefulInfoFragment : Fragment() {
 
-//    private lateinit var ent : List<Entry>
-//
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        GetGoogleSpreadsheetTask(object : OnFetched {
-//            override fun onEntriesFetched(entries: List<Entry>) {
-//                ent = entries
-//            }
-//        }).execute()
-//
-//    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -43,6 +29,7 @@ class UsefulInfoFragment : Fragment() {
 
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
+        loadListView(rootView)
 
         val twcButton = rootView.findViewById<ImageButton>(R.id.twitch_button)
         twcButton?.setOnClickListener {
@@ -50,18 +37,9 @@ class UsefulInfoFragment : Fragment() {
         }
 
         return rootView
-//        val textView = TextView(activity)
-//        textView.setText(R.string.hello_blank_fragment)
-//        return textView
     }
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        initializeListViewOnItemClickListener()
-//        initializeSwipeToRefresh()
-//        refreshListView()
-//    }
+
+
 
     fun loadTwitchChatWebView() {
         val intent = Intent(activity, WebViewActivity::class.java).apply {
@@ -97,19 +75,19 @@ class UsefulInfoFragment : Fragment() {
              */
             setOnRefreshListener {
                 Log.i("MAIN", "onRefresh called from SwipeRefreshLayout")
-                refreshListView(view)
+                loadListView(view, true)
             }
         }
     }
 
-    private fun refreshListView(view: View) {
+    private fun loadListView(view: View, forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask(object : OnFetched {
             override fun onEntriesFetched(entries: List<Entry>) {
                 view.findViewById<ListView>(R.id.list_view).apply {
                     adapter = EntryListAdapter(activity, entries)
                 }
             }
-        }).execute()
+        }, forceRefresh).execute()
 
         view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
             isRefreshing = false

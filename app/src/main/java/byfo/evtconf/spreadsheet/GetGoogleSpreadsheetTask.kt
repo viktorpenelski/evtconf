@@ -6,21 +6,45 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.web.client.RestTemplate
-import java.net.URL
 
 
 /**
  * Created by Vic on 2/24/2018.
  */
 
-class GetGoogleSpreadsheetTask(private val onEntry : OnFetched) : AsyncTask<URL, Int, List<Entry>>() {
+class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forceRefresh : Boolean = false) : AsyncTask<Unit, Unit, List<Entry>>() {
 
     private val TAG = "DownstreamTask"
     private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
 
 
-    override fun doInBackground(vararg urls: URL): List<Entry>? {
+    override fun doInBackground(vararg params : Unit): List<Entry>? {
 
+        val cache = SpreadsheetCache.instance
+
+        if (forceRefresh || cache.isNotUpToDate()) {
+            val entries = remoteGetEntries()
+            Log.d(TAG, entries.toString())
+            cache.updateEntries(entries)
+
+            return entries
+        }
+
+        val entries = cache.retrieveEntries()
+        Log.d(TAG, entries.toString())
+        return entries
+    }
+
+    override fun onPostExecute(result: List<Entry>) {
+
+        val list = result
+                .filter { !it.isEmpty() }
+                .toList()
+
+        onEntry.onEntriesFetched(list)
+    }
+
+    private fun remoteGetEntries() : List<Entry> {
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(StringHttpMessageConverter())
 
@@ -35,18 +59,7 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched) : AsyncTask<URL,
             it -> Entry.fromJSONObject(it)
         }.toList()
 
-        Log.d(TAG, entries.toString())
-
         return entries
-    }
-
-    override fun onPostExecute(result: List<Entry>) {
-
-        val list = result
-                .filter { !it.isEmpty() }
-                .toList()
-
-        onEntry.onEntriesFetched(list)
     }
 
     /**
