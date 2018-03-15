@@ -20,7 +20,7 @@ import byfo.evtconf.spreadsheet.OnFetched
 /**
  * A simple [Fragment] subclass.
  */
-class UsefulInfoFragment : Fragment() {
+class MainScheduleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
