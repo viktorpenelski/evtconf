@@ -14,7 +14,7 @@ data class SpreadsheetEntry(val title: String, val time: String, val picture: St
      *
      * @return true if both title and time are empty strings.
      */
-    fun isEmpty() : Boolean {
+    fun isEmpty(): Boolean {
         return title.isEmpty() || time.isEmpty()
     }
 
@@ -34,10 +34,10 @@ data class SpreadsheetEntry(val title: String, val time: String, val picture: St
          * For reference check out the following GET request, looking for the array element "feed.entry":
          * https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json
          */
-        fun fromJSONObject(obj: org.json.JSONObject) : SpreadsheetEntry {
+        fun fromJSONObject(obj: org.json.JSONObject): SpreadsheetEntry {
             return try {
                 SpreadsheetEntry(
-                        obj.getJSONObject(TITLE).getString(VALUE) ,
+                        obj.getJSONObject(TITLE).getString(VALUE),
                         obj.getJSONObject(TIME).getString(VALUE),
                         obj.getJSONObject(PICTURE).getString(VALUE),
                         obj.getJSONObject(LINK).getString(VALUE))

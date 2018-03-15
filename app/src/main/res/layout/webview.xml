@@ -4,8 +4,6 @@
     android:id="@+id/webview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
-    android:scrollbarAlwaysDrawHorizontalTrack="true"
     android:fadeScrollbars="false"
-    >
-</WebView>
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true" />

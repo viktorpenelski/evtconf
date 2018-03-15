@@ -13,10 +13,10 @@ import android.widget.AdapterView
 import android.widget.ListView
 import byfo.evtconf.R
 import byfo.evtconf.WebViewActivity
-import byfo.evtconf.spreadsheet.SpreadsheetEntry
 import byfo.evtconf.spreadsheet.EntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import byfo.evtconf.spreadsheet.OnFetched
+import byfo.evtconf.spreadsheet.SpreadsheetEntry
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +26,7 @@ class MainScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val rootView = inflater.inflate(R.layout.main_event_entries, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_main_schedule, container, false)
 
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)

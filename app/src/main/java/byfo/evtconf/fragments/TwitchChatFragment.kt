@@ -37,8 +37,8 @@ class TwitchChatFragment : Fragment() {
             }
 
         }.apply {
-                    loadUrl(TWITCH_CHAT_URL)
-                }
+            loadUrl(TWITCH_CHAT_URL)
+        }
 
     }
 }
