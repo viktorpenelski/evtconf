@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">EvtConf</string>
-    <string name="twitch_button">Twitch Chat</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="category_usefulinfo">INFO</string>
-    <string name="category_places">PLACES</string>
-    <string name="category_food">FOOD</string>
-    <string name="category_nature">NATURE</string>
+    <string name="category_main_event_info">MAIN STAGE</string>
+    <string name="category_tournaments">TOURNAMENTS</string>
+    <string name="category_twitch_chat">TWITCH CHAT</string>
 </resources>

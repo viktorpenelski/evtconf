@@ -12,11 +12,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set the content of the activity to use the  activity_main.xml layout file
         setContentView(R.layout.activity_main)
-
-        // Find the view pager that will allow the user to swipe between fragments
         val viewPager = findViewById<View>(R.id.viewpager) as ViewPager
+
+        // set how many offscreen tabs of the viewPager should be cached
+        viewPager.offscreenPageLimit = 2
 
         // Create an adapter that knows which fragment should be shown on each page
         val adapter = SimpleFragmentPagerAdapter(this, supportFragmentManager)

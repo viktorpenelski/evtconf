@@ -28,14 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/twitch_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:background="@drawable/twitchtv_logo"
-            android:contentDescription="@string/twitch_button" />
-
     </LinearLayout>
 
 

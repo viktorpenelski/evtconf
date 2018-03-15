@@ -31,24 +31,7 @@ class UsefulInfoFragment : Fragment() {
         initializeSwipeToRefresh(rootView)
         loadListView(rootView)
 
-        val twcButton = rootView.findViewById<ImageButton>(R.id.twitch_button)
-        twcButton?.setOnClickListener {
-            loadTwitchChatWebView()
-        }
-
         return rootView
-    }
-
-
-
-    fun loadTwitchChatWebView() {
-        val intent = Intent(activity, WebViewActivity::class.java).apply {
-            putExtra(WebViewActivity.EXTRAS_URL, "https://www.twitch.tv/popout/riotgames/chat")
-            putExtra(WebViewActivity.EXTRAS_REQUEST_DESKTOP, true)
-            putExtra(WebViewActivity.EXTRAS_ENABLE_JS, true)
-        }
-
-        startActivity(intent)
     }
 
     private fun initializeListViewOnItemClickListener(view: View) {
