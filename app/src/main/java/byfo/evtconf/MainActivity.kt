@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        title = getString(R.string.app_name_long)
+
         setContentView(R.layout.activity_main)
         val viewPager = findViewById<View>(R.id.viewpager) as ViewPager
 
