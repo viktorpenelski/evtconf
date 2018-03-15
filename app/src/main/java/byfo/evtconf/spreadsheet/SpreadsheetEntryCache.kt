@@ -3,16 +3,18 @@ package byfo.evtconf.spreadsheet
 import org.joda.time.DateTime
 
 /**
- * Created by victo on 3/13/2018.
+ * Singleton class used to cache a list of SpreadsheetEntries.
+ *
+ * The cached list is stored in a local variable and is considered "outdated" if either
+ * the list is empty or more than 30 minutes have elapsed since it was last updated.
  */
-
-class SpreadsheetCache {
+class SpreadsheetEntryCache {
 
     private var cachedEntries = listOf<SpreadsheetEntry>()
     private var lastCached = DateTime.now()
 
     companion object {
-        val instance: SpreadsheetCache by lazy { Holder.INSTANCE }
+        val instance: SpreadsheetEntryCache by lazy { Holder.INSTANCE }
     }
 
     fun isNotUpToDate(): Boolean {
@@ -29,7 +31,7 @@ class SpreadsheetCache {
     }
 
     private object Holder {
-        val INSTANCE = SpreadsheetCache()
+        val INSTANCE = SpreadsheetEntryCache()
     }
 
 

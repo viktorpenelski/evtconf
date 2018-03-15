@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate
 /**
  * Created by Vic on 2/24/2018.
  */
-
 class GetGoogleSpreadsheetTask(private val onEntry: OnFetched, private val forceRefresh: Boolean = false) : AsyncTask<Unit, Unit, List<SpreadsheetEntry>>() {
 
     private val TAG = "DownstreamTask"
@@ -20,7 +19,7 @@ class GetGoogleSpreadsheetTask(private val onEntry: OnFetched, private val force
 
     override fun doInBackground(vararg params: Unit): List<SpreadsheetEntry>? {
 
-        val cache = SpreadsheetCache.instance
+        val cache = SpreadsheetEntryCache.instance
 
         if (forceRefresh || cache.isNotUpToDate()) {
             val entries = remoteGetEntries()

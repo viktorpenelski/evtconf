@@ -18,10 +18,10 @@ import com.facebook.drawee.view.SimpleDraweeView
 class EntryListAdapter(private var activity: Activity, private var spreadsheetEntries: List<SpreadsheetEntry>)
     : BaseAdapter() {
 
-    private class ViewHolder(row: View?) {
-        var txtTime: TextView? = row?.findViewById<TextView>(R.id.txtTime)
-        var txtTitle: TextView? = row?.findViewById<TextView>(R.id.txtTitle)
-        var imgLogo: SimpleDraweeView? = row?.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
+    private class ViewHolder(row: View) {
+        var txtTime = row.findViewById(R.id.txtTime) as TextView
+        var txtTitle = row.findViewById(R.id.txtTitle) as TextView
+        var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -39,13 +39,13 @@ class EntryListAdapter(private var activity: Activity, private var spreadsheetEn
         }
 
         spreadsheetEntries[position].let {
-            viewHolder.txtTime?.text = it.time
-            viewHolder.txtTitle?.text = it.title
+            viewHolder.txtTime.text = it.time
+            viewHolder.txtTitle.text = it.title
 
             if (it.picture.isNotBlank()) {
-                viewHolder.imgLogo?.setImageURI(Uri.parse(it.picture))
+                viewHolder.imgLogo.setImageURI(Uri.parse(it.picture))
             } else {
-                viewHolder.imgLogo?.setActualImageResource(R.drawable.gplaytvlogo)
+                viewHolder.imgLogo.setActualImageResource(R.drawable.gplaytvlogo)
             }
         }
 
@@ -63,6 +63,4 @@ class EntryListAdapter(private var activity: Activity, private var spreadsheetEn
     override fun getCount(): Int {
         return spreadsheetEntries.size
     }
-
-
 }

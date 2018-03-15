@@ -79,7 +79,6 @@ class MainScheduleFragment : Fragment() {
 
     }
 
-
     private fun loadExternalUrlWebView(url: String) {
         val intent = Intent(activity, WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.EXTRAS_URL, url)

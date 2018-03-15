@@ -9,13 +9,12 @@ import org.json.JSONException
 data class SpreadsheetEntry(val title: String, val time: String, val picture: String, val redirectUrl: String) {
 
     /**
-     * an SpreadsheetEntry is considered "empty" when either one of the elements that it cannot be used without -
-     * title or time, is an empty string.
+     * A SpreadsheetEntry is considered "empty" when all fields are empty
      *
-     * @return true if both title and time are empty strings.
+     * @return true if all fields are empty strings.
      */
     fun isEmpty(): Boolean {
-        return title.isEmpty() || time.isEmpty()
+        return title.isEmpty() || time.isEmpty() || picture.isEmpty() || redirectUrl.isEmpty()
     }
 
     companion object {
