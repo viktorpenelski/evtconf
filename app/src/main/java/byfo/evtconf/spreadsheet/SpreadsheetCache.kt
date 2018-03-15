@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 
 class SpreadsheetCache {
 
-    private var cachedEntries = listOf<Entry>()
+    private var cachedEntries = listOf<SpreadsheetEntry>()
     private var lastCached = DateTime.now()
 
     companion object {
@@ -19,12 +19,12 @@ class SpreadsheetCache {
         return cachedEntries.isEmpty() || lastCached.plusMinutes(30).isBeforeNow
     }
 
-    fun updateEntries(entries: List<Entry>) {
-        cachedEntries = entries.toList()
+    fun updateEntries(spreadsheetEntries: List<SpreadsheetEntry>) {
+        cachedEntries = spreadsheetEntries.toList()
         lastCached = DateTime.now()
     }
 
-    fun retrieveEntries(): List<Entry> {
+    fun retrieveEntries(): List<SpreadsheetEntry> {
         return cachedEntries
     }
 

@@ -5,7 +5,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-
+import byfo.evtconf.fragments.FragmentPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.offscreenPageLimit = 2
 
         // Create an adapter that knows which fragment should be shown on each page
-        val adapter = SimpleFragmentPagerAdapter(this, supportFragmentManager)
+        val adapter = FragmentPagerAdapter(this, supportFragmentManager)
 
         // Set the adapter onto the view pager
         viewPager.adapter = adapter

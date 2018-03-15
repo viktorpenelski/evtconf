@@ -1,4 +1,4 @@
-package byfo.evtconf
+package byfo.evtconf.fragments
 
 
 import android.content.Intent
@@ -10,9 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ImageButton
 import android.widget.ListView
-import byfo.evtconf.spreadsheet.Entry
+import byfo.evtconf.R
+import byfo.evtconf.WebViewActivity
+import byfo.evtconf.spreadsheet.SpreadsheetEntry
 import byfo.evtconf.spreadsheet.EntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import byfo.evtconf.spreadsheet.OnFetched
@@ -25,7 +26,7 @@ class MainScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val rootView = inflater.inflate(R.layout.activity_main_old, container, false)
+        val rootView = inflater.inflate(R.layout.main_event_entries, container, false)
 
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
@@ -40,7 +41,7 @@ class MainScheduleFragment : Fragment() {
 
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
 
-                    val entryClicked = adapter.getItemAtPosition(position) as Entry
+                    val entryClicked = adapter.getItemAtPosition(position) as SpreadsheetEntry
                     loadExternalUrlWebView(entryClicked.redirectUrl)
 
                     Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
@@ -65,9 +66,9 @@ class MainScheduleFragment : Fragment() {
 
     private fun loadListView(view: View, forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask(object : OnFetched {
-            override fun onEntriesFetched(entries: List<Entry>) {
+            override fun onEntriesFetched(spreadsheetEntries: List<SpreadsheetEntry>) {
                 view.findViewById<ListView>(R.id.list_view).apply {
-                    adapter = EntryListAdapter(activity, entries)
+                    adapter = EntryListAdapter(activity, spreadsheetEntries)
                 }
             }
         }, forceRefresh).execute()

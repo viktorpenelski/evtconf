@@ -15,7 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 /**
  * Created by Vic on 2/25/2018.
  */
-class EntryListAdapter(private var activity: Activity, private var entries: List<Entry>)
+class EntryListAdapter(private var activity: Activity, private var spreadsheetEntries: List<SpreadsheetEntry>)
     : BaseAdapter() {
 
     private class ViewHolder(row: View?) {
@@ -38,7 +38,7 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
             viewHolder = view.tag as ViewHolder
         }
 
-        entries[position].let {
+        spreadsheetEntries[position].let {
             viewHolder.txtTime?.text = it.time
             viewHolder.txtTitle?.text = it.title
 
@@ -52,8 +52,8 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
         return view as View
     }
 
-    override fun getItem(i: Int): Entry {
-        return entries[i]
+    override fun getItem(i: Int): SpreadsheetEntry {
+        return spreadsheetEntries[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -61,7 +61,7 @@ class EntryListAdapter(private var activity: Activity, private var entries: List
     }
 
     override fun getCount(): Int {
-        return entries.size
+        return spreadsheetEntries.size
     }
 
 

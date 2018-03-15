@@ -1,4 +1,4 @@
-package byfo.evtconf
+package byfo.evtconf.fragments
 
 
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import byfo.evtconf.R
 
 /**
  * A simple [Fragment] subclass.

@@ -6,10 +6,10 @@ import org.json.JSONException
 /**
  * Created by Viktor on 2/25/2018.
  */
-data class Entry(val title: String, val time: String, val picture: String, val redirectUrl: String) {
+data class SpreadsheetEntry(val title: String, val time: String, val picture: String, val redirectUrl: String) {
 
     /**
-     * an Entry is considered "empty" when either one of the elements that it cannot be used without -
+     * an SpreadsheetEntry is considered "empty" when either one of the elements that it cannot be used without -
      * title or time, is an empty string.
      *
      * @return true if both title and time are empty strings.
@@ -28,22 +28,22 @@ data class Entry(val title: String, val time: String, val picture: String, val r
         private const val VALUE = "\$t"
 
         /**
-         * Serialize an Entry from given JSONObject.
+         * Serialize an SpreadsheetEntry from given JSONObject.
          * This JSONObject has to follow google sheet's API.
          *
          * For reference check out the following GET request, looking for the array element "feed.entry":
          * https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json
          */
-        fun fromJSONObject(obj: org.json.JSONObject) : Entry {
+        fun fromJSONObject(obj: org.json.JSONObject) : SpreadsheetEntry {
             return try {
-                Entry(
+                SpreadsheetEntry(
                         obj.getJSONObject(TITLE).getString(VALUE) ,
                         obj.getJSONObject(TIME).getString(VALUE),
                         obj.getJSONObject(PICTURE).getString(VALUE),
                         obj.getJSONObject(LINK).getString(VALUE))
             } catch (e: JSONException) {
                 Log.e("EntrySerialization", "Something went wrong during deserialization of remote json - ${e.stackTrace}")
-                Entry("", "", "", "")
+                SpreadsheetEntry("", "", "", "")
             }
         }
     }

@@ -12,13 +12,13 @@ import org.springframework.web.client.RestTemplate
  * Created by Vic on 2/24/2018.
  */
 
-class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forceRefresh : Boolean = false) : AsyncTask<Unit, Unit, List<Entry>>() {
+class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forceRefresh : Boolean = false) : AsyncTask<Unit, Unit, List<SpreadsheetEntry>>() {
 
     private val TAG = "DownstreamTask"
     private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
 
 
-    override fun doInBackground(vararg params : Unit): List<Entry>? {
+    override fun doInBackground(vararg params : Unit): List<SpreadsheetEntry>? {
 
         val cache = SpreadsheetCache.instance
 
@@ -35,7 +35,7 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forc
         return entries
     }
 
-    override fun onPostExecute(result: List<Entry>) {
+    override fun onPostExecute(result: List<SpreadsheetEntry>) {
 
         val list = result
                 .filter { !it.isEmpty() }
@@ -44,7 +44,7 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forc
         onEntry.onEntriesFetched(list)
     }
 
-    private fun remoteGetEntries() : List<Entry> {
+    private fun remoteGetEntries() : List<SpreadsheetEntry> {
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(StringHttpMessageConverter())
 
@@ -55,11 +55,9 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forc
 
         val jsonEntries = jsonResponse.getJSONObject("feed").getJSONArray("entry")
 
-        val entries = jsonEntries.iterator().asSequence().map {
-            it -> Entry.fromJSONObject(it)
+        return jsonEntries.iterator().asSequence().map {
+            it -> SpreadsheetEntry.fromJSONObject(it)
         }.toList()
-
-        return entries
     }
 
     /**
@@ -76,6 +74,6 @@ class GetGoogleSpreadsheetTask(private val onEntry : OnFetched, private val forc
 }
 
 interface OnFetched {
-    fun onEntriesFetched(entries: List<Entry>)
+    fun onEntriesFetched(spreadsheetEntries: List<SpreadsheetEntry>)
 }
 
