@@ -1,7 +1,8 @@
 package byfo.evtconf.spreadsheet.mainstage
 
+import android.util.Log
 import byfo.evtconf.spreadsheet.SpreadsheetEntryCache
-import org.joda.time.DateTime
+import java.util.*
 
 /**
  * Singleton class used to cache a list of SpreadsheetEntries.
@@ -14,20 +15,25 @@ class MainStageSpreadsheetEntryCache private constructor() : SpreadsheetEntryCac
     private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
     private val factory = MainStageSpreadsheetEntryFactory()
     private var cachedMainStageEntries = listOf<MainStageSpreadsheetEntry>()
-    private var lastCached = DateTime.now()
+    private var lastCached = Calendar.getInstance()
 
     companion object {
         val INSTANCE: MainStageSpreadsheetEntryCache by lazy { Holder.INSTANCE }
     }
 
     override fun isNotUpToDate(): Boolean {
-        //TODO(vic): get rid of joda time
-        return cachedMainStageEntries.isEmpty() || lastCached.plusMinutes(30).isBeforeNow
+        return cachedMainStageEntries.isEmpty() || 30.minutesHavePassedSince(lastCached)
+    }
+
+    private fun Int.minutesHavePassedSince(givenTime : Calendar) : Boolean {
+        val threshold = Calendar.getInstance()
+        threshold.add(Calendar.MINUTE, -this)
+        return givenTime.before(threshold)
     }
 
     override fun updateEntries(entries: List<MainStageSpreadsheetEntry>) {
         cachedMainStageEntries = entries.toList()
-        lastCached = DateTime.now()
+        lastCached = Calendar.getInstance()
     }
 
     override fun retrieveEntries(): List<MainStageSpreadsheetEntry> {
@@ -45,6 +51,8 @@ class MainStageSpreadsheetEntryCache private constructor() : SpreadsheetEntryCac
     private object Holder {
         val INSTANCE = MainStageSpreadsheetEntryCache()
     }
+
+
 
 }
 
