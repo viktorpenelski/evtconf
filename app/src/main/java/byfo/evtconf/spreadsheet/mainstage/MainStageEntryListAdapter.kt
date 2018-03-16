@@ -1,4 +1,4 @@
-package byfo.evtconf.spreadsheet
+package byfo.evtconf.spreadsheet.mainstage
 
 import android.app.Activity
 import android.content.Context
@@ -15,7 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 /**
  * Created by Vic on 2/25/2018.
  */
-class EntryListAdapter(private var activity: Activity, private var spreadsheetEntries: List<SpreadsheetEntry>)
+class MainStageEntryListAdapter(private var activity: Activity, private var mainStageSpreadsheetEntries: List<MainStageSpreadsheetEntry>)
     : BaseAdapter() {
 
     private class ViewHolder(row: View) {
@@ -38,7 +38,7 @@ class EntryListAdapter(private var activity: Activity, private var spreadsheetEn
             viewHolder = view.tag as ViewHolder
         }
 
-        spreadsheetEntries[position].let {
+        mainStageSpreadsheetEntries[position].let {
             viewHolder.txtTime.text = it.time
             viewHolder.txtTitle.text = it.title
 
@@ -52,8 +52,8 @@ class EntryListAdapter(private var activity: Activity, private var spreadsheetEn
         return view as View
     }
 
-    override fun getItem(i: Int): SpreadsheetEntry {
-        return spreadsheetEntries[i]
+    override fun getItem(i: Int): MainStageSpreadsheetEntry {
+        return mainStageSpreadsheetEntries[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -61,6 +61,6 @@ class EntryListAdapter(private var activity: Activity, private var spreadsheetEn
     }
 
     override fun getCount(): Int {
-        return spreadsheetEntries.size
+        return mainStageSpreadsheetEntries.size
     }
 }

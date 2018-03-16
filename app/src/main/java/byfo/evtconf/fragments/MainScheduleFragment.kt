@@ -13,10 +13,11 @@ import android.widget.AdapterView
 import android.widget.ListView
 import byfo.evtconf.R
 import byfo.evtconf.WebViewActivity
-import byfo.evtconf.spreadsheet.EntryListAdapter
+import byfo.evtconf.spreadsheet.mainstage.MainStageEntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
-import byfo.evtconf.spreadsheet.OnFetched
-import byfo.evtconf.spreadsheet.SpreadsheetEntry
+import byfo.evtconf.spreadsheet.OnEntriesFetched
+import byfo.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntry
+import byfo.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntryCache
 
 /**
  * A simple [Fragment] subclass.
@@ -28,9 +29,11 @@ class MainScheduleFragment : Fragment() {
 
         val rootView = inflater.inflate(R.layout.fragment_main_schedule, container, false)
 
+        loadListView(rootView)
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
-        loadListView(rootView)
+
+        Log.d("fragment", "ON CREATE VIEW")
 
         return rootView
     }
@@ -41,7 +44,7 @@ class MainScheduleFragment : Fragment() {
 
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
 
-                    val entryClicked = adapter.getItemAtPosition(position) as SpreadsheetEntry
+                    val entryClicked = adapter.getItemAtPosition(position) as MainStageSpreadsheetEntry
                     loadExternalUrlWebView(entryClicked.redirectUrl)
 
                     Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
@@ -65,13 +68,13 @@ class MainScheduleFragment : Fragment() {
     }
 
     private fun loadListView(view: View, forceRefresh: Boolean = false) {
-        GetGoogleSpreadsheetTask(object : OnFetched {
-            override fun onEntriesFetched(spreadsheetEntries: List<SpreadsheetEntry>) {
+        GetGoogleSpreadsheetTask<MainStageSpreadsheetEntryCache, MainStageSpreadsheetEntry>(object : OnEntriesFetched<MainStageSpreadsheetEntry> {
+            override fun onEntriesFetched(entries: List<MainStageSpreadsheetEntry>) {
                 view.findViewById<ListView>(R.id.list_view).apply {
-                    adapter = EntryListAdapter(activity, spreadsheetEntries)
+                    adapter = MainStageEntryListAdapter(activity, entries)
                 }
             }
-        }, forceRefresh).execute()
+        }, forceRefresh).execute(MainStageSpreadsheetEntryCache.INSTANCE)
 
         view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
             isRefreshing = false

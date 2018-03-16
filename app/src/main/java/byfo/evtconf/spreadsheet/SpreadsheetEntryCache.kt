@@ -1,38 +1,28 @@
 package byfo.evtconf.spreadsheet
 
-import org.joda.time.DateTime
-
 /**
- * Singleton class used to cache a list of SpreadsheetEntries.
- *
- * The cached list is stored in a local variable and is considered "outdated" if either
- * the list is empty or more than 30 minutes have elapsed since it was last updated.
+ * Created by victo on 3/16/2018.
  */
-class SpreadsheetEntryCache {
+interface SpreadsheetEntryCache<T : SpreadsheetEntry> {
 
-    private var cachedEntries = listOf<SpreadsheetEntry>()
-    private var lastCached = DateTime.now()
+    /**
+     * Return weather the local cached collection is up to date.
+     *
+     * Return false if either the collection is empty or outdated based on predefined time.
+     */
+    fun isNotUpToDate(): Boolean
 
-    companion object {
-        val instance: SpreadsheetEntryCache by lazy { Holder.INSTANCE }
-    }
+    /**
+     * Provide a list of entries to update the local cache with.
+     */
+    fun updateEntries(entries: List<T>)
 
-    fun isNotUpToDate(): Boolean {
-        return cachedEntries.isEmpty() || lastCached.plusMinutes(30).isBeforeNow
-    }
+    /**
+     * Retrieve the local cache.
+     */
+    fun retrieveEntries(): List<T>
 
-    fun updateEntries(spreadsheetEntries: List<SpreadsheetEntry>) {
-        cachedEntries = spreadsheetEntries.toList()
-        lastCached = DateTime.now()
-    }
+    fun getUrl(): String
 
-    fun retrieveEntries(): List<SpreadsheetEntry> {
-        return cachedEntries
-    }
-
-    private object Holder {
-        val INSTANCE = SpreadsheetEntryCache()
-    }
-
-
+    fun getFactory(): SpreadsheetEntryFactory<T>
 }
