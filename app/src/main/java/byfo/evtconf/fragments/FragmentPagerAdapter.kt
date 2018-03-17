@@ -13,7 +13,7 @@ class FragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> MainScheduleFragment()
-            1 -> MainScheduleFragment()
+            1 -> TournamentFragment()
             else -> TwitchChatFragment()
         }
     }

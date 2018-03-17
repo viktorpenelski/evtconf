@@ -9,6 +9,6 @@ import byfo.evtconf.spreadsheet.SpreadsheetEntry
 data class MainStageSpreadsheetEntry(val title: String, val time: String, val picture: String, val redirectUrl: String) : SpreadsheetEntry {
 
     override fun isEmpty(): Boolean {
-        return title.isEmpty() || time.isEmpty() || picture.isEmpty() || redirectUrl.isEmpty()
+        return title.isEmpty() && time.isEmpty() && picture.isEmpty()
     }
 }

@@ -34,7 +34,16 @@ but will definitely be planned for in the future.
 * Release to PlayStore
 * Figure out QR code installation of the app
 
+### IMPROVEMENTS:
+* if URL is invalid, do not launch WebView from any element
+* pause traffic from twitch chat once not in focus
+* profile app to make sure it is
+    * only downloading pictures ONCE
+    * not using /too much/ traffic for the twitch chat
+
 ### Ideas / open questions:
+
+* Rolling message on top
 
 * Highlight current event (time based)
   * optional - show info about bracket on home screen?

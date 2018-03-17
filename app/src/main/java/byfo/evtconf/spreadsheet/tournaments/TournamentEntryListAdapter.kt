@@ -1,4 +1,4 @@
-package byfo.evtconf.spreadsheet.mainstage
+package byfo.evtconf.spreadsheet.tournaments
 
 import android.app.Activity
 import android.content.Context
@@ -15,11 +15,10 @@ import com.facebook.drawee.view.SimpleDraweeView
 /**
  * Created by Vic on 2/25/2018.
  */
-class MainStageEntryListAdapter(private var activity: Activity, private var mainStageSpreadsheetEntries: List<MainStageSpreadsheetEntry>)
+class TournamentEntryListAdapter(private var activity: Activity, private var entries: List<TournamentSpreadsheetEntry>)
     : BaseAdapter() {
 
     private class ViewHolder(row: View) {
-        var txtTime = row.findViewById(R.id.txtTime) as TextView
         var txtTitle = row.findViewById(R.id.txtTitle) as TextView
         var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
     }
@@ -30,7 +29,7 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
 
         if (convertView == null) {
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.main_stage_entry_list_row, parent, false)
+            view = inflater.inflate(R.layout.tournament_entry_list_row, parent, false)
             viewHolder = ViewHolder(view)
             view?.tag = viewHolder
         } else {
@@ -38,9 +37,12 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
             viewHolder = view.tag as ViewHolder
         }
 
-        mainStageSpreadsheetEntries[position].let {
-            viewHolder.txtTime.text = it.time
-            viewHolder.txtTitle.text = it.title
+        entries[position].let {
+            if (it.title.isBlank()) {
+                viewHolder.txtTitle.visibility = View.GONE
+            } else {
+                viewHolder.txtTitle.text = it.title
+            }
 
             if (it.picture.isNotBlank()) {
                 viewHolder.imgLogo.setImageURI(Uri.parse(it.picture))
@@ -52,8 +54,8 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
         return view as View
     }
 
-    override fun getItem(i: Int): MainStageSpreadsheetEntry {
-        return mainStageSpreadsheetEntries[i]
+    override fun getItem(i: Int): TournamentSpreadsheetEntry {
+        return entries[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -61,6 +63,6 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
     }
 
     override fun getCount(): Int {
-        return mainStageSpreadsheetEntries.size
+        return entries.size
     }
 }

@@ -12,7 +12,7 @@ class TournamentSpreadsheetEntryFactory : SpreadsheetEntryFactory<TournamentSpre
 
     companion object {
 
-        private const val TITLE = "gsx\$title"
+        private const val TITLE = "gsx\$text"
         private const val PICTURE = "gsx\$picture"
         private const val LINK = "gsx\$url"
 
