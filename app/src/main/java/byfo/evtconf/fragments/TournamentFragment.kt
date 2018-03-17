@@ -13,16 +13,18 @@ import android.widget.AdapterView
 import android.widget.ListView
 import byfo.evtconf.R
 import byfo.evtconf.WebViewActivity
-import byfo.evtconf.spreadsheet.mainstage.MainStageEntryListAdapter
 import byfo.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import byfo.evtconf.spreadsheet.OnEntriesFetched
-import byfo.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntry
-import byfo.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntryCache
+import byfo.evtconf.spreadsheet.tournaments.TournamentEntryListAdapter
+import byfo.evtconf.spreadsheet.tournaments.TournamentSpreadsheetEntry
+import byfo.evtconf.spreadsheet.tournaments.TournamentSpreadsheetEntryCache
 
 /**
  * A simple [Fragment] subclass.
  */
 class TournamentFragment : Fragment() {
+
+    private val TAG = "F_TOURNAMENT"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,7 +35,7 @@ class TournamentFragment : Fragment() {
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
 
-        Log.d("fragment", "ON CREATE VIEW")
+        Log.d(TAG, "ON CREATE VIEW")
 
         return rootView
     }
@@ -44,10 +46,10 @@ class TournamentFragment : Fragment() {
 
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
 
-                    val entryClicked = adapter.getItemAtPosition(position) as MainStageSpreadsheetEntry
+                    val entryClicked = adapter.getItemAtPosition(position) as TournamentSpreadsheetEntry
                     loadExternalUrlWebView(entryClicked.redirectUrl)
 
-                    Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
+                    Log.d(TAG, "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
                 }
             }
         }
@@ -61,20 +63,20 @@ class TournamentFragment : Fragment() {
              * performs a swipe-to-refresh gesture.
              */
             setOnRefreshListener {
-                Log.i("MAIN", "onRefresh called from SwipeRefreshLayout")
+                Log.i(TAG, "onRefresh called from SwipeRefreshLayout")
                 loadListView(view, true)
             }
         }
     }
 
     private fun loadListView(view: View, forceRefresh: Boolean = false) {
-        GetGoogleSpreadsheetTask<MainStageSpreadsheetEntryCache, MainStageSpreadsheetEntry>(object : OnEntriesFetched<MainStageSpreadsheetEntry> {
-            override fun onEntriesFetched(entries: List<MainStageSpreadsheetEntry>) {
+        GetGoogleSpreadsheetTask<TournamentSpreadsheetEntryCache, TournamentSpreadsheetEntry>(object : OnEntriesFetched<TournamentSpreadsheetEntry> {
+            override fun onEntriesFetched(entries: List<TournamentSpreadsheetEntry>) {
                 view.findViewById<ListView>(R.id.list_view).apply {
-                    adapter = MainStageEntryListAdapter(activity, entries)
+                    adapter = TournamentEntryListAdapter(activity, entries)
                 }
             }
-        }, forceRefresh).execute(MainStageSpreadsheetEntryCache.INSTANCE)
+        }, forceRefresh).execute(TournamentSpreadsheetEntryCache.INSTANCE)
 
         view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
             isRefreshing = false

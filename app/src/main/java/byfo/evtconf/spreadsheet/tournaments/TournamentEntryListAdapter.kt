@@ -15,7 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 /**
  * Created by Vic on 2/25/2018.
  */
-class TournamentEntryListAdapter(private var activity: Activity, private var mainStageSpreadsheetEntries: List<TournamentSpreadsheetEntry>)
+class TournamentEntryListAdapter(private var activity: Activity, private var entries: List<TournamentSpreadsheetEntry>)
     : BaseAdapter() {
 
     private class ViewHolder(row: View) {
@@ -29,7 +29,7 @@ class TournamentEntryListAdapter(private var activity: Activity, private var mai
 
         if (convertView == null) {
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.entry_list_row, parent, false)
+            view = inflater.inflate(R.layout.tournament_entry_list_row, parent, false)
             viewHolder = ViewHolder(view)
             view?.tag = viewHolder
         } else {
@@ -37,8 +37,12 @@ class TournamentEntryListAdapter(private var activity: Activity, private var mai
             viewHolder = view.tag as ViewHolder
         }
 
-        mainStageSpreadsheetEntries[position].let {
-            viewHolder.txtTitle.text = it.title
+        entries[position].let {
+            if (it.title.isBlank()) {
+                viewHolder.txtTitle.visibility = View.GONE
+            } else {
+                viewHolder.txtTitle.text = it.title
+            }
 
             if (it.picture.isNotBlank()) {
                 viewHolder.imgLogo.setImageURI(Uri.parse(it.picture))
@@ -51,7 +55,7 @@ class TournamentEntryListAdapter(private var activity: Activity, private var mai
     }
 
     override fun getItem(i: Int): TournamentSpreadsheetEntry {
-        return mainStageSpreadsheetEntries[i]
+        return entries[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -59,6 +63,6 @@ class TournamentEntryListAdapter(private var activity: Activity, private var mai
     }
 
     override fun getCount(): Int {
-        return mainStageSpreadsheetEntries.size
+        return entries.size
     }
 }

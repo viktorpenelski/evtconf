@@ -30,7 +30,7 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
 
         if (convertView == null) {
             val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.entry_list_row, parent, false)
+            view = inflater.inflate(R.layout.main_stage_entry_list_row, parent, false)
             viewHolder = ViewHolder(view)
             view?.tag = viewHolder
         } else {

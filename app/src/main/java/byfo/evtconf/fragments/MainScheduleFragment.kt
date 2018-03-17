@@ -24,6 +24,8 @@ import byfo.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntryCache
  */
 class MainScheduleFragment : Fragment() {
 
+    private val TAG = "F_MAIN_SCH"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -33,7 +35,7 @@ class MainScheduleFragment : Fragment() {
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
 
-        Log.d("fragment", "ON CREATE VIEW")
+        Log.d(TAG, "ON CREATE VIEW")
 
         return rootView
     }
@@ -47,7 +49,7 @@ class MainScheduleFragment : Fragment() {
                     val entryClicked = adapter.getItemAtPosition(position) as MainStageSpreadsheetEntry
                     loadExternalUrlWebView(entryClicked.redirectUrl)
 
-                    Log.d("kappa", "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
+                    Log.d(TAG, "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
                 }
             }
         }
@@ -61,7 +63,7 @@ class MainScheduleFragment : Fragment() {
              * performs a swipe-to-refresh gesture.
              */
             setOnRefreshListener {
-                Log.i("MAIN", "onRefresh called from SwipeRefreshLayout")
+                Log.i(TAG, "onRefresh called from SwipeRefreshLayout")
                 loadListView(view, true)
             }
         }

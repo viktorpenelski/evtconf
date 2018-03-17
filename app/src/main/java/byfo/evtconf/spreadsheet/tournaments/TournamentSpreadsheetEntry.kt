@@ -8,6 +8,6 @@ import byfo.evtconf.spreadsheet.SpreadsheetEntry
 data class TournamentSpreadsheetEntry(val title: String, val picture: String, val redirectUrl: String) : SpreadsheetEntry {
 
     override fun isEmpty(): Boolean {
-        return title.isEmpty() || picture.isEmpty() || redirectUrl.isEmpty()
+        return title.isEmpty() && picture.isEmpty()
     }
 }
