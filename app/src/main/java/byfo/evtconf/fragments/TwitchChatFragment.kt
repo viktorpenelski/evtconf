@@ -1,6 +1,7 @@
 package byfo.evtconf.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,11 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import android.widget.Switch
 import byfo.evtconf.R
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.util.Log
+import android.widget.Button
+
 
 /**
  * A simple [Fragment] subclass.
@@ -25,6 +31,7 @@ class TwitchChatFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_twitch_chat, container, false)
         initializeTwitchSwitch(view.findViewById(R.id.twitch_switch))
+        initializeOpenTwitchButton(view.findViewById(R.id.open_external_twitch_button))
         return view
     }
 
@@ -37,6 +44,18 @@ class TwitchChatFragment : Fragment() {
                 initializeWebView()
                 activity.findViewById<WebView>(R.id.twitch_webview).visibility = View.VISIBLE
             }
+        }
+    }
+
+    private fun initializeOpenTwitchButton(button: Button) {
+
+        button.setOnClickListener {
+            val url = getTwitchUrl()
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(url)
+                startActivity(this)
+            }
+
         }
     }
 
@@ -76,9 +95,21 @@ class TwitchChatFragment : Fragment() {
     }
 
     private fun pauseWebView() {
+        val twitchInstalled = getTwitchUrl()
+        Log.d("TWIIITCH", "isInstalled: $twitchInstalled")
         activity.findViewById<WebView>(R.id.twitch_webview).apply {
             onPause()
         }
+    }
+
+    private fun getTwitchUrl(): String {
+        return try {
+            context.packageManager.getPackageInfo("tv.twitch.android.app", PackageManager.GET_ACTIVITIES)
+            "twitch://stream/shroud"
+        } catch (e: PackageManager.NameNotFoundException) {
+            "https://m.twitch.tv/shroud"
+        }
+
     }
 
 
