@@ -6,7 +6,9 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import byfo.evtconf.R
 import com.facebook.drawee.view.SimpleDraweeView
@@ -22,6 +24,7 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
         var txtTime = row.findViewById(R.id.txtTime) as TextView
         var txtTitle = row.findViewById(R.id.txtTitle) as TextView
         var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
+        var imgLink = row.findViewById<View>(R.id.imgLink) as ImageView
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -42,14 +45,18 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
             viewHolder.txtTime.text = it.time
             viewHolder.txtTitle.text = it.title
 
-            if (it.picture.isNotBlank()) {
+            val imgLink = viewHolder.imgLink
+            if (URLUtil.isNetworkUrl(it.redirectUrl) && imgLink.visibility == View.INVISIBLE) {
+                imgLink.visibility = View.VISIBLE
+            } else if (!URLUtil.isNetworkUrl(it.redirectUrl) && imgLink.visibility == View.VISIBLE){
+                viewHolder.imgLink.visibility = View.INVISIBLE
+            }
+
+            if (URLUtil.isNetworkUrl(it.picture)) {
                 viewHolder.imgLogo.setImageURI(Uri.parse(it.picture))
-
-
             } else {
                 viewHolder.imgLogo.setActualImageResource(R.drawable.gplaytvlogo)
             }
-
 
         }
 
@@ -67,4 +74,5 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
     override fun getCount(): Int {
         return mainStageSpreadsheetEntries.size
     }
+
 }
