@@ -35,6 +35,8 @@ but will definitely be planned for in the future.
 * Figure out QR code installation of the app
 
 ### IMPROVEMENTS:
+* SHOW ERROR if no internet connection instead of app crash
+
 * if URL is invalid, do not launch WebView from any element
 * pause traffic from twitch chat once not in focus
 * profile app to make sure it is

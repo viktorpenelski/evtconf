@@ -44,9 +44,13 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
 
             if (it.picture.isNotBlank()) {
                 viewHolder.imgLogo.setImageURI(Uri.parse(it.picture))
+
+
             } else {
                 viewHolder.imgLogo.setActualImageResource(R.drawable.gplaytvlogo)
             }
+
+
         }
 
         return view as View

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/f_twitchLogo"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            fresco:actualImageScaleType="fitStart"
+            fresco:placeholderImage="@drawable/twitchtv_logo" />
+
+        <Switch
+            android:id="@+id/twitch_switch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:text="Show Twitch Chat  "
+            android:textAlignment="textEnd"
+            android:textColor="#4A148C"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/twitch_webview_container"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/twitch_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="gone"/>
+
+        <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/twitch_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:visibility="invisible"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

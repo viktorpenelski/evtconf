@@ -1,6 +1,5 @@
 package byfo.evtconf.spreadsheet.mainstage
 
-import android.util.Log
 import byfo.evtconf.spreadsheet.SpreadsheetEntryCache
 import java.util.*
 
