@@ -14,49 +14,25 @@ Since the project is written in kotlin, porting to iOS (if I get my hands on an 
 and/or having a backend should there be a need, will not be part of the initial release, 
 but will definitely be planned for in the future.
 
+
+
+
+
 ### TODO:
-* ~~Call google spreadsheet~~
-  * ~~parse result into usable information~~
-
-* ~~Dynamically create list from all information taken from above~~
-  * ~~MVP: listview of text only~~
-  * ~~Cached picture + text, linkable to detailed info / outside link?~~
-
-* ~~add second screen, slidable from first~~
-  * ~~for now content of the screen should be larger images that link to webview~~
-
-* ~~implement swipe up to refresh~~
-  
 * Extract hard-coded variables into properties
-
 
 * Release to PlayStore
 * Figure out QR code installation of the app
 
-### IMPROVEMENTS:
-* SHOW ERROR if no internet connection instead of app crash
+### Improvements / Bugs:
 
-* ~~if URL is invalid, do not launch WebView from any element~~
-* ~~pause traffic from twitch chat once not in focus~~
-* profile app to make sure it is
-    * only downloading pictures ONCE
-    * not using /too much/ traffic for the twitch chat
+* SHOW ERROR if no internet connection instead of app crash
+* replace restTemplate with OkHttp (optional)
+
 
 ### Ideas / open questions:
 
-* Rolling message on top
-
 * Highlight current event (time based)
   * optional - show info about bracket on home screen?
-
-* Q: when should we update? (per x minute? after device sleep? )
-    
 * Figure out branding - dynamic? custom per release?
-
-* Feature wishlist
-  * Additional screens
-    * chat (twitch chat?)
-    * About the team?
-    * opt-in rewards?
-    * scavenge hunt (QR codes)
-  * incoming match
+* scavenge hunt (QR codes)

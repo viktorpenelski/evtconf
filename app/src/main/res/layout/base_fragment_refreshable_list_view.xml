@@ -4,7 +4,7 @@
     android:id="@+id/test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="byfo.evtconf.MainActivity">
+    tools:context="com.github.viktorpenelski.evtconf.MainActivity">
 
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
