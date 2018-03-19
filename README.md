@@ -22,14 +22,13 @@ but will definitely be planned for in the future.
   * ~~MVP: listview of text only~~
   * ~~Cached picture + text, linkable to detailed info / outside link?~~
 
-* add second screen, slidable from first
-  * for now content of the screen should be larger images that link to webview
+* ~~add second screen, slidable from first~~
+  * ~~for now content of the screen should be larger images that link to webview~~
 
 * ~~implement swipe up to refresh~~
   
 * Extract hard-coded variables into properties
 
-* Event banner on top
 
 * Release to PlayStore
 * Figure out QR code installation of the app
@@ -37,8 +36,8 @@ but will definitely be planned for in the future.
 ### IMPROVEMENTS:
 * SHOW ERROR if no internet connection instead of app crash
 
-* if URL is invalid, do not launch WebView from any element
-* pause traffic from twitch chat once not in focus
+* ~~if URL is invalid, do not launch WebView from any element~~
+* ~~pause traffic from twitch chat once not in focus~~
 * profile app to make sure it is
     * only downloading pictures ONCE
     * not using /too much/ traffic for the twitch chat

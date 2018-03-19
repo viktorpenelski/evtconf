@@ -35,12 +35,15 @@ class MainActivity : AppCompatActivity() {
         // Give the TabLayout the ViewPager
         val tabLayout = findViewById<View>(R.id.sliding_tabs) as TabLayout
         tabLayout.setupWithViewPager(viewPager)
+
     }
+
 
     override fun onStart() {
         super.onStart()
-        loadSettings(true)
+        loadSettings()
     }
+
 
     private fun loadSettings(forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask<SettingsEntryCache, SettingsEntry>(object : OnEntriesFetched<SettingsEntry> {

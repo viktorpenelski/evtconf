@@ -12,9 +12,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.Switch
+import android.widget.*
 import byfo.evtconf.R
 import byfo.evtconf.spreadsheet.settings.ActiveSettings
 
@@ -36,11 +34,11 @@ class TwitchChatFragment : Fragment() {
     private fun initializeTwitchSwitch(switch: Switch) {
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (!isChecked) {
-                activity.findViewById<WebView>(R.id.twitch_webview).visibility = View.INVISIBLE
-                pauseWebView()
+                activity.findViewById<FrameLayout>(R.id.twitch_webview_container).visibility = View.INVISIBLE
+                destroyWebView()
             } else {
                 initializeWebView()
-                activity.findViewById<WebView>(R.id.twitch_webview).visibility = View.VISIBLE
+                activity.findViewById<FrameLayout>(R.id.twitch_webview_container).visibility = View.VISIBLE
             }
         }
     }
@@ -57,9 +55,28 @@ class TwitchChatFragment : Fragment() {
         }
     }
 
+    private fun destroyWebView() {
+        val view = activity.findViewById<WebView>(R.id.twitch_webview) ?: return
+
+        activity.findViewById<FrameLayout>(R.id.twitch_webview_container).removeAllViews()
+        view.clearHistory()
+        view.clearCache(false)
+        view.loadUrl("about:blank")
+        view.onPause()
+        view.removeAllViews()
+        view.destroyDrawingCache()
+        view.destroy()
+    }
+
     private fun initializeWebView() {
 
-        val webView = activity.findViewById<WebView>(R.id.twitch_webview)
+        val layout = activity.findViewById<FrameLayout>(R.id.twitch_webview_container)
+
+        val webView = WebView(context).apply {
+            id = R.id.twitch_webview
+            isScrollbarFadingEnabled = false
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        }
 
         webView.also {
             it.settings.userAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
@@ -87,15 +104,10 @@ class TwitchChatFragment : Fragment() {
 
         }.apply {
             loadUrl("https://www.twitch.tv/popout/${ActiveSettings.INSTANCE.getTwitchChannel()}/chat")
-            onResume()
+            layout.addView(this)
         }
 
-    }
 
-    private fun pauseWebView() {
-        activity.findViewById<WebView>(R.id.twitch_webview).apply {
-            onPause()
-        }
     }
 
     private fun getTwitchUrl(): String {

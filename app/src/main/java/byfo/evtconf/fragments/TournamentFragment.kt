@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.AdapterView
 import android.widget.ListView
 import byfo.evtconf.R
@@ -47,7 +48,10 @@ class TournamentFragment : Fragment() {
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
 
                     val entryClicked = adapter.getItemAtPosition(position) as TournamentSpreadsheetEntry
-                    loadExternalUrlWebView(entryClicked.redirectUrl)
+
+                    if (URLUtil.isNetworkUrl(entryClicked.redirectUrl)) {
+                        loadExternalUrlWebView(entryClicked.redirectUrl)
+                    }
 
                     Log.d(TAG, "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
                 }
@@ -92,6 +96,5 @@ class TournamentFragment : Fragment() {
 
         startActivity(intent)
     }
-
 
 }
