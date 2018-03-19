@@ -2,6 +2,8 @@ package byfo.evtconf.fragments
 
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,21 +12,17 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Switch
 import byfo.evtconf.R
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.util.Log
-import android.widget.Button
+import byfo.evtconf.spreadsheet.settings.ActiveSettings
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class TwitchChatFragment : Fragment() {
-
-    private val TWITCH_CHAT_URL = "https://www.twitch.tv/popout/hashinshin/chat"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -79,7 +77,7 @@ class TwitchChatFragment : Fragment() {
 
                     if (newProgress < 100 && View.GONE.equals(progressBar.visibility)) {
                         progressBar.visibility = View.VISIBLE
-                    } else if (newProgress >= 100){
+                    } else if (newProgress >= 100) {
                         progressBar.visibility = View.GONE
                     }
 
@@ -88,15 +86,13 @@ class TwitchChatFragment : Fragment() {
 
 
         }.apply {
-            loadUrl(TWITCH_CHAT_URL)
+            loadUrl("https://www.twitch.tv/popout/${ActiveSettings.INSTANCE.getTwitchChannel()}/chat")
             onResume()
         }
 
     }
 
     private fun pauseWebView() {
-        val twitchInstalled = getTwitchUrl()
-        Log.d("TWIIITCH", "isInstalled: $twitchInstalled")
         activity.findViewById<WebView>(R.id.twitch_webview).apply {
             onPause()
         }
@@ -105,9 +101,9 @@ class TwitchChatFragment : Fragment() {
     private fun getTwitchUrl(): String {
         return try {
             context.packageManager.getPackageInfo("tv.twitch.android.app", PackageManager.GET_ACTIVITIES)
-            "twitch://stream/shroud"
+            "twitch://stream/${ActiveSettings.INSTANCE.getTwitchChannel()}"
         } catch (e: PackageManager.NameNotFoundException) {
-            "https://m.twitch.tv/shroud"
+            "https://m.twitch.tv/${ActiveSettings.INSTANCE.getTwitchChannel()}"
         }
 
     }

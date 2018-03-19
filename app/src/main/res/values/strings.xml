@@ -5,4 +5,6 @@
     <string name="category_main_event_info">MAIN STAGE</string>
     <string name="category_tournaments">TOURNAMENTS</string>
     <string name="category_twitch_chat">TWITCH CHAT</string>
+
+    <string name="twitch_channel">gplaytv1</string>
 </resources>

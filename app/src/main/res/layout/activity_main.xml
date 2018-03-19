@@ -10,10 +10,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:tabTextColor="@color/colorPrimaryLight"
-        app:tabSelectedTextColor="@color/colorWhite"
         app:tabIndicatorColor="@color/colorSecondaryDark"
-        app:tabMode="fixed" />
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/colorPrimaryLight" />
+
+    <TextView
+        android:id="@+id/main_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorSecondaryDark"
+        android:visibility="gone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryLight" />
+
+    <TextClock
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/colorSecondaryDark"
+        android:textStyle="bold"
+        android:format24Hour="d MMMM, EEEE  -  hh:mm  "
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryLight" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

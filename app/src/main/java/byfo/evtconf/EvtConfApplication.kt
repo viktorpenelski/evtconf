@@ -1,6 +1,7 @@
 package byfo.evtconf
 
 import android.app.Application
+import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 
 /**
@@ -8,8 +9,17 @@ import com.facebook.drawee.backends.pipeline.Fresco
  */
 class EvtConfApplication : Application() {
 
+    companion object {
+        private lateinit var mContext : Context
+
+        fun getContext() : Context {
+            return mContext
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)
+        mContext = this
     }
 }

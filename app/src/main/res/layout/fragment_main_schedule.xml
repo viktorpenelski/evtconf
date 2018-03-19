@@ -17,7 +17,9 @@
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:divider="@color/colorPrimaryLight"
+            android:dividerHeight="1dp"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
