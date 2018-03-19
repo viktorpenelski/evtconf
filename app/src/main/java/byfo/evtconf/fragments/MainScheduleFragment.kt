@@ -30,7 +30,7 @@ class MainScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val rootView = inflater.inflate(R.layout.fragment_main_schedule, container, false)
+        val rootView = inflater.inflate(R.layout.base_fragment_refreshable_list_view, container, false)
 
         loadListView(rootView)
         initializeListViewOnItemClickListener(rootView)

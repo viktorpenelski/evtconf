@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#42a5f5</color>
     <color name="colorPrimaryLight">#80d6ff</color>
-    <color name="colorPrimaryDark">#0077c2</color>
+    <color name="colorPrimaryDark">#002171</color>
 
     <color name="colorSecondary">#ff6d00</color>
     <color name="colorSecondaryLight">#ff9e40</color>
@@ -10,5 +10,4 @@
 
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorIndigo">#3F51B5</color>
 </resources>

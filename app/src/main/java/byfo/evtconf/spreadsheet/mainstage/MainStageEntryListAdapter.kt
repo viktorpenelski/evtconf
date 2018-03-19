@@ -24,7 +24,7 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
         var txtTime = row.findViewById(R.id.txtTime) as TextView
         var txtTitle = row.findViewById(R.id.txtTitle) as TextView
         var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
-        var imgLink = row.findViewById<View>(R.id.imgLink) as ImageView
+        var imgLink = row.findViewById<View>(R.id.main_stage_img_link) as ImageView
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

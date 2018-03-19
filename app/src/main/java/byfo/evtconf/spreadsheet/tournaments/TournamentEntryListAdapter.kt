@@ -6,7 +6,9 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
 import byfo.evtconf.R
 import com.facebook.drawee.view.SimpleDraweeView
@@ -21,6 +23,7 @@ class TournamentEntryListAdapter(private var activity: Activity, private var ent
     private class ViewHolder(row: View) {
         var txtTitle = row.findViewById(R.id.txtTitle) as TextView
         var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
+        var linkView = row.findViewById<LinearLayout>(R.id.tournament_link_container)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -42,6 +45,13 @@ class TournamentEntryListAdapter(private var activity: Activity, private var ent
                 viewHolder.txtTitle.visibility = View.GONE
             } else {
                 viewHolder.txtTitle.text = it.title
+            }
+
+            val linkView = viewHolder.linkView
+            if (URLUtil.isNetworkUrl(it.redirectUrl) && linkView.visibility == View.GONE) {
+                linkView.visibility = View.VISIBLE
+            } else if (!URLUtil.isNetworkUrl(it.redirectUrl) && linkView.visibility == View.VISIBLE){
+                viewHolder.linkView.visibility = View.GONE
             }
 
             if (it.picture.isNotBlank()) {

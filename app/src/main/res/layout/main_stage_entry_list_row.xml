@@ -48,12 +48,13 @@
                 android:layout_height="match_parent"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorIndigo"
+                android:typeface="sans"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="0.9"
                 tools:text="Foo" />
 
             <ImageView
-                android:id="@+id/imgLink"
+                android:id="@+id/main_stage_img_link"
                 android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -66,7 +67,7 @@
                 android:scaleY="0.5"
                 android:scaleType="center"
                 android:tint="@color/colorSecondaryDark"
-                android:contentDescription="Link available" />
+                android:contentDescription="@string/link_available" />
 
         </LinearLayout>
 

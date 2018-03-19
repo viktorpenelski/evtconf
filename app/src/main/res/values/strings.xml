@@ -7,4 +7,5 @@
     <string name="category_twitch_chat">TWITCH CHAT</string>
 
     <string name="twitch_channel">gplaytv1</string>
+    <string name="link_available">Link available</string>
 </resources>
