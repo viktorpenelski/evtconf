@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // sets the title visible on the main screen, doesn't change the app name itself.
         title = getString(R.string.app_name_long)
 
         setContentView(R.layout.activity_main)

@@ -39,7 +39,8 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/colorSecondaryDark"
         android:textStyle="bold"
-        android:format24Hour="d MMMM, EEEE  -  hh:mm  " />
+        android:format24Hour="d MMMM, EEEE  -  HH:mm  "
+        android:format12Hour="d MMMM, EEEE  -  hh:mm a " />
 
     <View
         android:layout_width="match_parent"

@@ -14,20 +14,23 @@ Since the project is written in kotlin, porting to iOS (if I get my hands on an 
 and/or having a backend should there be a need, will not be part of the initial release, 
 but will definitely be planned for in the future.
 
+__NOTE2:__ the app is currently branded for a particular event happening on 24th and 25th of March 2018.
+
 
 
 
 
 ### TODO:
-* Extract hard-coded variables into properties
 
-* Release to PlayStore
+* Extract hard-coded variables into properties
 * Figure out QR code installation of the app
 
 ### Improvements / Bugs:
 
 * SHOW ERROR if no internet connection instead of app crash
 * replace restTemplate with OkHttp (optional)
+* implement persistant caches, so that they can be resoted if app is closed long enough
+to get garbage collected, but before the 30 minute refresh period that I am aiming for.
 
 
 ### Ideas / open questions:
