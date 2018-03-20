@@ -1,9 +1,13 @@
 package com.github.viktorpenelski.evtconf.spreadsheet
 
 import android.os.AsyncTask
+import android.widget.Toast
+import com.github.viktorpenelski.evtconf.EvtConfApplication
+import com.github.viktorpenelski.evtconf.R
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.http.converter.StringHttpMessageConverter
+import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
 
 
@@ -17,6 +21,9 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
         private val forceRefresh: Boolean = false)
     : AsyncTask<T, Unit, List<U>>() {
 
+    // this is set to true in case of failing to complete remote call
+    var networkError = false
+
     override fun doInBackground(vararg params: T): List<U> {
 
         if (params.isEmpty()) {
@@ -26,10 +33,11 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
         val cache = params[0]
 
         if (forceRefresh || cache.isNotUpToDate()) {
-            val entries = fetchRemoteEntries(cache)
-            cache.updateEntries(entries)
-
-            return entries
+            val fetchedEntries = fetchRemoteEntries(cache)
+            if (fetchedEntries.isNotEmpty()) {
+                cache.updateEntries(fetchedEntries)
+                return fetchedEntries
+            }
         }
 
         val entries = cache.retrieveEntries()
@@ -42,22 +50,37 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
                 .filter { !it.isEmpty() }
                 .toList()
 
+        if (networkError) {
+            val context = EvtConfApplication.getContext()
+            Toast.makeText(context, context.getString(R.string.toast_no_network), Toast.LENGTH_LONG).show()
+        }
+
         onFetched.onEntriesFetched(list)
     }
 
     private fun fetchRemoteEntries(cache: T): List<U> {
-        val restTemplate = RestTemplate()
-        restTemplate.messageConverters.add(StringHttpMessageConverter())
 
-        val response = restTemplate.getForObject(cache.getUrl(), String::class.java)
+        val response = executeRemoteRequest(cache)
+        val jsonEntries = response
+                ?.getJSONObject("feed")?.getJSONArray("entry")
+                ?: return emptyList()
 
-        val jsonResponse = JSONObject(response)
+        return jsonEntries.iterator().asSequence()
+                .map { it -> cache.getFactory().createFromJsonObject(it) }
+                .toList()
+    }
 
-        val jsonEntries = jsonResponse.getJSONObject("feed").getJSONArray("entry")
+    private fun executeRemoteRequest(cache: T) : JSONObject? {
+        return try {
+            val restTemplate = RestTemplate()
+            restTemplate.messageConverters.add(StringHttpMessageConverter())
+            val response = restTemplate.getForObject(cache.getUrl(), String::class.java)
+            JSONObject(response)
+        } catch (e: RestClientException) {
+            networkError = true
+            null
+        }
 
-        return jsonEntries.iterator().asSequence().map { it ->
-            cache.getFactory().createFromJsonObject(it)
-        }.toList()
     }
 
     /**

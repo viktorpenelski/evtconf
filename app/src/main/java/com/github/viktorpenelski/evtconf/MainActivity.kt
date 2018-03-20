@@ -1,5 +1,6 @@
 package com.github.viktorpenelski.evtconf
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
@@ -22,21 +23,16 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.app_name_long)
 
         setContentView(R.layout.activity_main)
-        val viewPager = findViewById<View>(R.id.viewpager) as ViewPager
+        val viewPager = findViewById<ViewPager>(R.id.viewpager).also {
+            // how many offscreen tabs should be cached
+            it.offscreenPageLimit = 2
 
-        // set how many offscreen tabs of the viewPager should be cached
-        viewPager.offscreenPageLimit = 2
+            // Create an adapter that knows which fragment should be shown on each page
+            it.adapter = FragmentPagerAdapter(this, supportFragmentManager)
 
-        // Create an adapter that knows which fragment should be shown on each page
-        val adapter = FragmentPagerAdapter(this, supportFragmentManager)
-
-        // Set the adapter onto the view pager
-        viewPager.adapter = adapter
-
+        }
         // Give the TabLayout the ViewPager
-        val tabLayout = findViewById<View>(R.id.sliding_tabs) as TabLayout
-        tabLayout.setupWithViewPager(viewPager)
-
+        findViewById<TabLayout>(R.id.sliding_tabs).setupWithViewPager(viewPager)
     }
 
     override fun onStart() {

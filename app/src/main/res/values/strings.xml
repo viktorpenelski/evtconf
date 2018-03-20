@@ -2,6 +2,8 @@
     <string name="app_name">GPlay Event</string>
     <string name="app_name_long">GplayTV Gaming WKND Burgas</string>
 
+    <string name="toast_no_network">No network access!</string>
+
     <string name="category_main_event_info">MAIN STAGE</string>
     <string name="category_tournaments">TOURNAMENTS</string>
     <string name="category_twitch_chat">TWITCH CHAT</string>
