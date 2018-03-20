@@ -38,6 +38,7 @@ class TwitchChatFragment : Fragment() {
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (!isChecked) {
                 activity.findViewById<FrameLayout>(R.id.twitch_webview_container).visibility = View.INVISIBLE
+                activity.findViewById<ProgressBar>(R.id.twitch_progress_bar).visibility = View.GONE
                 destroyWebView()
             } else {
                 initializeWebView()

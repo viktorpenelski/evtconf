@@ -1,7 +1,10 @@
-## Veersion 1.0.1
+## Veersion 1.1
+
+* Pinch-to-zoom is now allowed for in-app browser.
 
 * Fixed a bug where devices with 12h format would not show day/month in header.
-* Pinch-to-zoom is now allowed for in-app browser.
+* Fixed a bug where if "show twitch chat" switch is pressed twice fast,
+a load bar would keep scrolling indefinitely until switch is clicked again.
 
 
 ## Version 1.0 - branded for GPlay Burgas 2018
