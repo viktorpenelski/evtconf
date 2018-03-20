@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,9 @@ import android.widget.AdapterView
 import android.widget.ListView
 import com.github.viktorpenelski.evtconf.R
 import com.github.viktorpenelski.evtconf.WebViewActivity
-import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageEntryListAdapter
 import com.github.viktorpenelski.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
+import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageEntryListAdapter
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntryCache
 
@@ -24,8 +23,6 @@ import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsh
  * A simple [Fragment] subclass.
  */
 class MainScheduleFragment : Fragment() {
-
-    private val TAG = "F_MAIN_SCH"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

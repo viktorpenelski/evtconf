@@ -1,11 +1,7 @@
 package com.github.viktorpenelski.evtconf.spreadsheet.settings
 
-import android.util.Log
 import com.github.viktorpenelski.evtconf.EvtConfApplication
 import com.github.viktorpenelski.evtconf.R
-import com.github.viktorpenelski.evtconf.spreadsheet.GetGoogleSpreadsheetTask
-import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
-import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntryCache
 
 /**

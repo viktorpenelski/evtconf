@@ -1,6 +1,5 @@
 package com.github.viktorpenelski.evtconf.spreadsheet.tournaments
 
-import android.util.Log
 import com.github.viktorpenelski.evtconf.spreadsheet.SpreadsheetEntryFactory
 import org.json.JSONException
 import org.json.JSONObject

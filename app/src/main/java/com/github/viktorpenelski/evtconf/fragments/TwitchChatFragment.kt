@@ -12,7 +12,10 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.*
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ProgressBar
+import android.widget.Switch
 import com.github.viktorpenelski.evtconf.R
 import com.github.viktorpenelski.evtconf.spreadsheet.settings.ActiveSettings
 

@@ -1,7 +1,6 @@
 package com.github.viktorpenelski.evtconf.spreadsheet
 
 import android.os.AsyncTask
-import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.http.converter.StringHttpMessageConverter
@@ -17,8 +16,6 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
         private val onFetched: OnEntriesFetched<U>,
         private val forceRefresh: Boolean = false)
     : AsyncTask<T, Unit, List<U>>() {
-
-    private val TAG = "DownstreamTask"
 
     override fun doInBackground(vararg params: T): List<U> {
 

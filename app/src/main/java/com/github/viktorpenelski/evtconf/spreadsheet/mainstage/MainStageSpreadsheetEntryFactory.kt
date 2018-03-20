@@ -1,6 +1,5 @@
 package com.github.viktorpenelski.evtconf.spreadsheet.mainstage
 
-import android.util.Log
 import com.github.viktorpenelski.evtconf.spreadsheet.SpreadsheetEntryFactory
 import org.json.JSONException
 import org.json.JSONObject

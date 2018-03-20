@@ -10,8 +10,8 @@ import android.webkit.URLUtil
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.github.viktorpenelski.evtconf.R
 import com.facebook.drawee.view.SimpleDraweeView
+import com.github.viktorpenelski.evtconf.R
 
 
 /**
