@@ -24,7 +24,6 @@ class SettingsEntryFactory : SpreadsheetEntryFactory<SettingsEntry> {
                     obj.getJSONObject(Companion.TWITCH_CHANNEL).getString(VALUE),
                     obj.getJSONObject(Companion.TOP_MESSAGE).getString(VALUE))
         } catch (e: JSONException) {
-            Log.e("deserialization", "Something went wrong during deserialization of remote json - ${e.stackTrace}")
             SettingsEntry("", "")
         }
     }

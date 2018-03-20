@@ -36,8 +36,6 @@ class MainScheduleFragment : Fragment() {
         initializeListViewOnItemClickListener(rootView)
         initializeSwipeToRefresh(rootView)
 
-        Log.d(TAG, "ON CREATE VIEW")
-
         return rootView
     }
 
@@ -52,7 +50,6 @@ class MainScheduleFragment : Fragment() {
                         loadExternalUrlWebView(entryClicked.redirectUrl)
                     }
 
-                    Log.d(TAG, "AdapterView<*>: $adapter \n View: $arg1 \n Int: $position \n Long: $arg3")
                 }
             }
         }
@@ -66,7 +63,6 @@ class MainScheduleFragment : Fragment() {
              * performs a swipe-to-refresh gesture.
              */
             setOnRefreshListener {
-                Log.i(TAG, "onRefresh called from SwipeRefreshLayout")
                 loadListView(view, true)
             }
         }

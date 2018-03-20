@@ -29,7 +29,6 @@ class MainStageSpreadsheetEntryFactory : SpreadsheetEntryFactory<MainStageSpread
                         obj.getJSONObject(PICTURE).getString(VALUE),
                         obj.getJSONObject(LINK).getString(VALUE))
             } catch (e: JSONException) {
-                Log.e("deserialization", "Something went wrong during deserialization of remote json - ${e.stackTrace}")
                 MainStageSpreadsheetEntry("", "", "", "")
             }
         }

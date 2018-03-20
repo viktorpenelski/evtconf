@@ -41,19 +41,6 @@ class ActiveSettings private constructor() {
 
     }
 
-    private fun refreshCacheIfNeeded() {
-
-        Log.d("CACHEEE", "isNotUpToDate: ${cache.isNotUpToDate()}")
-
-        if (!cache.isNotUpToDate()) {
-            return
-        }
-
-        GetGoogleSpreadsheetTask<SettingsEntryCache, SettingsEntry>(object : OnEntriesFetched<SettingsEntry> {
-            override fun onEntriesFetched(entries: List<SettingsEntry>) {}
-        }, false).execute(cache)
-
-    }
 
     private object Holder {
         val INSTANCE = ActiveSettings()

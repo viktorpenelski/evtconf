@@ -12,7 +12,7 @@
 * add second screen, slidable from first
   * for now content of the screen should be larger images that link to webview
 
-* implement swipe up to refresh
+* implemented swipe up to refresh
 
 ---
 

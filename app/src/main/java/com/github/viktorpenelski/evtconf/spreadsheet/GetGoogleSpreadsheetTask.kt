@@ -30,14 +30,12 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
 
         if (forceRefresh || cache.isNotUpToDate()) {
             val entries = fetchRemoteEntries(cache)
-            Log.d(TAG, entries.toString())
             cache.updateEntries(entries)
 
             return entries
         }
 
         val entries = cache.retrieveEntries()
-        Log.d(TAG, entries.toString())
         return entries
     }
 
@@ -57,7 +55,6 @@ class GetGoogleSpreadsheetTask<T : SpreadsheetEntryCache<U>, U : SpreadsheetEntr
         val response = restTemplate.getForObject(cache.getUrl(), String::class.java)
 
         val jsonResponse = JSONObject(response)
-        Log.d(TAG, response.toString())
 
         val jsonEntries = jsonResponse.getJSONObject("feed").getJSONArray("entry")
 
