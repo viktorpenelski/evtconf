@@ -1,23 +1,28 @@
+## Veersion 1.0.1
+
+* Fixed a bug where devices with 12h format would not show day/month in header.
+* Pinch-to-zoom is now allowed for in-app browser.
+
+
 ## Version 1.0 - branded for GPlay Burgas 2018
 
-#### Implemented:
+* The app has three main tabs:
+  * MAIN STAGE
+    * Contains a list of all events happening on the main stage of the event.
+    * All entries are optionally clickable, linking to outside URLs via in-app browser.
+  * TOURNAMENTS
+    * Contains a list of all tournaments happening at the event.
+    * All entries are optionally clickable, linking to outside URLs via in-app browser.
+  * TWITCH CHAT
+    * supports in-app view-only chat.
+    * can open twitch in either dedicated app (if installed) or mobile version in web browser.
 
-* Call google spreadsheet
-  * parse result into usable information
-
-* Dynamically create list from all information taken from above
-  * MVP: listview of text only
-  * Cached picture + text, linkable to detailed info / outside link?
-
-* add second screen, slidable from first
-  * for now content of the screen should be larger images that link to webview
-
-* implemented swipe up to refresh
+* Implemented swipe up to refresh (for MAIN STAGE and TOURNAMENTS tabs)
 
 ---
 
 * if URL is invalid, do not launch WebView from any element
-* pause traffic from twitch chat once not in focus
+* stop traffic from twitch chat once not in focus
 * profile app to make sure it is
     * only downloading pictures ONCE
     * not using /too much/ traffic for the twitch chat

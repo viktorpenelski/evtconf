@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
-/**
- * Created by Vic on 2/25/2018.
- */
 class WebViewActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,17 +21,55 @@ class WebViewActivity : Activity() {
      */
     private fun initializeWebView(): WebView {
 
-        return findViewById<WebView>(R.id.webview).also {
-            if (intent.extras.getBoolean(EXTRAS_REQUEST_DESKTOP, false)) {
-                it.settings.userAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
-            }
-            it.settings.javaScriptEnabled = intent.extras.getBoolean(EXTRAS_ENABLE_JS, false)
+        return findViewById<WebView>(R.id.webview).apply {
+            enableZoom()
+            configureUserAgent()
+            configureJavaScriptEnabled()
+            configureWebClient()
+        }
+    }
 
-            it.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
-                    view?.loadUrl(url)
-                    return true
-                }
+    /**
+     * Enable pinch zoom and disable on-screen zoom controls.
+     */
+    private fun WebView.enableZoom() {
+        this.settings.builtInZoomControls = true
+        this.settings.displayZoomControls = false
+    }
+
+    /**
+     * Based on [EXTRAS_REQUEST_DESKTOP], have the WebView request either mobile or desktop websites.
+     *
+     * If not provided, mobile websites will be requested by default.
+     */
+    private fun WebView.configureUserAgent() {
+        if (intent.extras.getBoolean(EXTRAS_REQUEST_DESKTOP, false)) {
+            this.settings.userAgentString = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
+        }
+    }
+
+    /**
+     * Based on [EXTRAS_ENABLE_JS], enable or disable JS for this WebView.
+     *
+     * If not provided, JS will be disabled by default.
+     */
+    private fun WebView.configureJavaScriptEnabled() {
+        this.settings.javaScriptEnabled = intent.extras.getBoolean(EXTRAS_ENABLE_JS, false)
+    }
+
+    /**
+     * Makes the host application handle url instead of webview.
+     *
+     * Deprecated [WebViewClient.shouldOverrideUrlLoading] is used here in order to support
+     * devices prior to API 24.
+     */
+    private fun WebView.configureWebClient() {
+        this.webViewClient = object : WebViewClient() {
+            @Suppress("OverridingDeprecatedMember")
+            // consider the new method as well (for devices above android N)
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
+                view?.loadUrl(url)
+                return true
             }
         }
     }
