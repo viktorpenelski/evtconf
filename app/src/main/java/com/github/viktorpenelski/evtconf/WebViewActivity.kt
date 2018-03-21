@@ -37,6 +37,8 @@ class WebViewActivity : AppCompatActivity() {
      * Enable pinch zoom and disable on-screen zoom controls.
      */
     private fun WebView.enableZoom() {
+        this.settings.loadWithOverviewMode = true
+        this.settings.useWideViewPort = true
         this.settings.builtInZoomControls = true
         this.settings.displayZoomControls = false
     }
