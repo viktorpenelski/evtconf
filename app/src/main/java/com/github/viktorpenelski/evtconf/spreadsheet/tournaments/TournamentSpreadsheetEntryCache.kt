@@ -1,5 +1,7 @@
 package com.github.viktorpenelski.evtconf.spreadsheet.tournaments
 
+import com.github.viktorpenelski.evtconf.spreadsheet.ActiveSpreadsheetProperties
+import com.github.viktorpenelski.evtconf.spreadsheet.ActiveSpreadsheetProperties.Companion.PropertyTag.TOURNAMENTS
 import com.github.viktorpenelski.evtconf.spreadsheet.SpreadsheetEntryCache
 import java.util.*
 
@@ -11,7 +13,6 @@ import java.util.*
  */
 class TournamentSpreadsheetEntryCache private constructor() : SpreadsheetEntryCache<TournamentSpreadsheetEntry> {
 
-    private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/2/public/values?alt=json"
     private val factory = TournamentSpreadsheetEntryFactory()
     private var cachedMainStageEntries = listOf<TournamentSpreadsheetEntry>()
     private var lastCached = Calendar.getInstance()
@@ -40,7 +41,7 @@ class TournamentSpreadsheetEntryCache private constructor() : SpreadsheetEntryCa
     }
 
     override fun getUrl(): String {
-        return URL
+        return ActiveSpreadsheetProperties.INSTANCE.getUrlFor(TOURNAMENTS)
     }
 
     override fun getFactory() : TournamentSpreadsheetEntryFactory {

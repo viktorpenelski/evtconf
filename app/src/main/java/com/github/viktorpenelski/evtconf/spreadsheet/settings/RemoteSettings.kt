@@ -7,12 +7,12 @@ import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntryCach
 /**
  * Created by victo on 3/19/2018.
  */
-class ActiveSettings private constructor() {
+class RemoteSettings private constructor() {
 
     private val cache = SettingsEntryCache.INSTANCE
 
     companion object {
-        val INSTANCE: ActiveSettings by lazy { Holder.INSTANCE }
+        val INSTANCE: RemoteSettings by lazy { Holder.INSTANCE }
     }
 
     fun getTwitchChannel(): String {
@@ -39,6 +39,6 @@ class ActiveSettings private constructor() {
 
 
     private object Holder {
-        val INSTANCE = ActiveSettings()
+        val INSTANCE = RemoteSettings()
     }
 }

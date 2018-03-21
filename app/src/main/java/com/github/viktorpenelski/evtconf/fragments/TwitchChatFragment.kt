@@ -17,7 +17,7 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Switch
 import com.github.viktorpenelski.evtconf.R
-import com.github.viktorpenelski.evtconf.spreadsheet.settings.ActiveSettings
+import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
 
 
 /**
@@ -107,7 +107,7 @@ class TwitchChatFragment : Fragment() {
 
 
         }.apply {
-            loadUrl("https://www.twitch.tv/popout/${ActiveSettings.INSTANCE.getTwitchChannel()}/chat")
+            loadUrl("https://www.twitch.tv/popout/${RemoteSettings.INSTANCE.getTwitchChannel()}/chat")
             layout.addView(this)
         }
 
@@ -117,9 +117,9 @@ class TwitchChatFragment : Fragment() {
     private fun getTwitchUrl(): String {
         return try {
             context.packageManager.getPackageInfo("tv.twitch.android.app", PackageManager.GET_ACTIVITIES)
-            "twitch://stream/${ActiveSettings.INSTANCE.getTwitchChannel()}"
+            "twitch://stream/${RemoteSettings.INSTANCE.getTwitchChannel()}"
         } catch (e: PackageManager.NameNotFoundException) {
-            "https://m.twitch.tv/${ActiveSettings.INSTANCE.getTwitchChannel()}"
+            "https://m.twitch.tv/${RemoteSettings.INSTANCE.getTwitchChannel()}"
         }
 
     }

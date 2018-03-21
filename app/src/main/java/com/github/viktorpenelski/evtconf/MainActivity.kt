@@ -1,6 +1,5 @@
 package com.github.viktorpenelski.evtconf
 
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
@@ -12,7 +11,7 @@ import com.github.viktorpenelski.evtconf.spreadsheet.GetGoogleSpreadsheetTask
 import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntryCache
-import com.github.viktorpenelski.evtconf.spreadsheet.settings.ActiveSettings
+import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         GetGoogleSpreadsheetTask<SettingsEntryCache, SettingsEntry>(object : OnEntriesFetched<SettingsEntry> {
             override fun onEntriesFetched(entries: List<SettingsEntry>) {
                 findViewById<TextView>(R.id.main_top_text).apply {
-                    val topMessage = ActiveSettings.INSTANCE.getTopMessage()
+                    val topMessage = RemoteSettings.INSTANCE.getTopMessage()
                     if (topMessage.isNotBlank()) {
                         text = topMessage
                         visibility = View.VISIBLE

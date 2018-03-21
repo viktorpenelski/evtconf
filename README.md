@@ -27,11 +27,10 @@ __NOTE2:__ the app is currently branded for a particular event happening on 24th
 
 ### Improvements / Bugs:
 
-* SHOW ERROR if no internet connection instead of app crash
-* replace restTemplate with OkHttp (optional)
+* add some tests ~_~
+* replace restTemplate with OkHttp (optional ~250kb smaller apk)
 * implement persistant caches, so that they can be resoted if app is closed long enough
 to get garbage collected, but before the 30 minute refresh period that I am aiming for.
-
 
 ### Ideas / open questions:
 

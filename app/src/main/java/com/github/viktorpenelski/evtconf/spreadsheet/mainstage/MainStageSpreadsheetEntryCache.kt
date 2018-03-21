@@ -1,5 +1,7 @@
 package com.github.viktorpenelski.evtconf.spreadsheet.mainstage
 
+import com.github.viktorpenelski.evtconf.spreadsheet.ActiveSpreadsheetProperties
+import com.github.viktorpenelski.evtconf.spreadsheet.ActiveSpreadsheetProperties.Companion.PropertyTag.MAIN_STAGE
 import com.github.viktorpenelski.evtconf.spreadsheet.SpreadsheetEntryCache
 import java.util.*
 
@@ -11,7 +13,6 @@ import java.util.*
  */
 class MainStageSpreadsheetEntryCache private constructor() : SpreadsheetEntryCache<MainStageSpreadsheetEntry> {
 
-    private val URL = "https://spreadsheets.google.com/feeds/list/1_Ol_0bP-S3GqEXEGPL3ODKmHAdWBBXcOdE3_M4phVe0/1/public/values?alt=json"
     private val factory = MainStageSpreadsheetEntryFactory()
     private var cachedMainStageEntries = listOf<MainStageSpreadsheetEntry>()
     private var lastCached = Calendar.getInstance()
@@ -40,7 +41,7 @@ class MainStageSpreadsheetEntryCache private constructor() : SpreadsheetEntryCac
     }
 
     override fun getUrl(): String {
-        return URL
+        return ActiveSpreadsheetProperties.INSTANCE.getUrlFor(MAIN_STAGE)
     }
 
     override fun getFactory(): MainStageSpreadsheetEntryFactory {

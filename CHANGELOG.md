@@ -6,6 +6,9 @@
 * Fixed a bug where if "show twitch chat" switch is pressed twice fast,
 a load bar would keep scrolling indefinitely until switch is clicked again.
 
+---
+* Moved spreadsheet URL/s to app.properties file.
+
 
 ## Version 1.0 - branded for GPlay Burgas 2018
 
