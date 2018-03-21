@@ -34,6 +34,16 @@ class RemoteSettings private constructor() {
         } else {
             entries[0].topMessage
         }
+    }
+
+    fun getEventMapUrl(): String {
+        val entries = cache.retrieveEntries()
+
+        return if (entries.isEmpty() || entries[0].eventMapUrl.isEmpty()) {
+            ""
+        } else {
+            entries[0].eventMapUrl
+        }
 
     }
 

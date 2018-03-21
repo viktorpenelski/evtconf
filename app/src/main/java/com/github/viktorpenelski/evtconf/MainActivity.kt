@@ -1,9 +1,12 @@
 package com.github.viktorpenelski.evtconf
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.github.viktorpenelski.evtconf.fragments.FragmentPagerAdapter
@@ -18,10 +21,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // sets the title visible on the main screen, doesn't change the app name itself.
-        title = getString(R.string.app_name_long)
-
         setContentView(R.layout.activity_main)
+
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         val viewPager = findViewById<ViewPager>(R.id.viewpager).also {
             // how many offscreen tabs should be cached
             it.offscreenPageLimit = 2
@@ -32,6 +35,33 @@ class MainActivity : AppCompatActivity() {
         }
         // Give the TabLayout the ViewPager
         findViewById<TabLayout>(R.id.sliding_tabs).setupWithViewPager(viewPager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.toolbar_map_btn -> {
+
+                val mapUrl = RemoteSettings.INSTANCE.getEventMapUrl()
+
+                if (mapUrl.isBlank()) {
+                    return false
+                }
+
+                val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
+                    putExtra(WebViewActivity.EXTRAS_URL, mapUrl)
+                }
+                startActivity(intent)
+
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onStart() {

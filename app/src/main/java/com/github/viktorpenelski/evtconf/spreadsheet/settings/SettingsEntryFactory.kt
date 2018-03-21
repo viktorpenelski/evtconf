@@ -13,6 +13,7 @@ class SettingsEntryFactory : SpreadsheetEntryFactory<SettingsEntry> {
 
         private const val TWITCH_CHANNEL = "gsx\$twitchchannel"
         private const val TOP_MESSAGE = "gsx\$topmessage"
+        private const val EVENT_MAP_URL = "gsx\$eventmapurl"
         private const val VALUE = "\$t"
 
     }
@@ -21,9 +22,10 @@ class SettingsEntryFactory : SpreadsheetEntryFactory<SettingsEntry> {
         return try {
             SettingsEntry(
                     obj.getJSONObject(Companion.TWITCH_CHANNEL).getString(VALUE),
-                    obj.getJSONObject(Companion.TOP_MESSAGE).getString(VALUE))
+                    obj.getJSONObject(Companion.TOP_MESSAGE).getString(VALUE),
+                    obj.getJSONObject(Companion.EVENT_MAP_URL).getString(VALUE))
         } catch (e: JSONException) {
-            SettingsEntry("", "")
+            SettingsEntry("", "", "")
         }
     }
 
