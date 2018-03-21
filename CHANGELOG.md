@@ -1,4 +1,9 @@
-## Veersion 1.1
+## Version 1.2
+
+* Added map button to the action bar, showing the venue map.
+* external links now start zoomed out in case they do not fit the screen.
+
+## Version 1.1
 
 * Pinch-to-zoom is now allowed for in-app browser.
 
