@@ -2,6 +2,7 @@ package com.github.viktorpenelski.evtconf
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
@@ -18,6 +19,19 @@ class WebViewActivity : AppCompatActivity() {
         initializeWebView().apply {
             loadUrl(intent.extras.getString(EXTRAS_URL))
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return false
     }
 
     /**
