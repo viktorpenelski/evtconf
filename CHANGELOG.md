@@ -1,3 +1,8 @@
+#### Version 1.3
+
+* added fade in / fade out transitions between activities
+* improved quality of map action icon
+
 ## Version 1.2
 
 * Added map button to the action bar, showing the venue map.
