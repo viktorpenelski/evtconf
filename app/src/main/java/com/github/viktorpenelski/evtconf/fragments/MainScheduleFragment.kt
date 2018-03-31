@@ -4,13 +4,11 @@ package com.github.viktorpenelski.evtconf.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.AdapterView
-import android.widget.ListView
 import com.github.viktorpenelski.evtconf.R
 import com.github.viktorpenelski.evtconf.WebViewActivity
 import com.github.viktorpenelski.evtconf.spreadsheet.GetGoogleSpreadsheetTask
@@ -18,6 +16,7 @@ import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageEntryListAdapter
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsheetEntryCache
+import kotlinx.android.synthetic.main.base_fragment_refreshable_list_view.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -37,7 +36,7 @@ class MainScheduleFragment : Fragment() {
     }
 
     private fun initializeListViewOnItemClickListener(view: View) {
-        view.findViewById<ListView>(R.id.list_view).apply {
+        view.list_view.apply {
             onItemClickListener = object : AdapterView.OnItemClickListener {
 
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
@@ -53,7 +52,7 @@ class MainScheduleFragment : Fragment() {
     }
 
     private fun initializeSwipeToRefresh(view: View) {
-        view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+        view.swiperefresh.apply {
 
             /*
              * Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
@@ -68,13 +67,13 @@ class MainScheduleFragment : Fragment() {
     private fun loadListView(view: View, forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask<MainStageSpreadsheetEntryCache, MainStageSpreadsheetEntry>(object : OnEntriesFetched<MainStageSpreadsheetEntry> {
             override fun onEntriesFetched(entries: List<MainStageSpreadsheetEntry>) {
-                view.findViewById<ListView>(R.id.list_view).apply {
+                view.list_view.apply {
                     adapter = MainStageEntryListAdapter(activity, entries)
                 }
             }
         }, forceRefresh).execute(MainStageSpreadsheetEntryCache.INSTANCE)
 
-        view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+        view.swiperefresh.apply {
             isRefreshing = false
         }
 
