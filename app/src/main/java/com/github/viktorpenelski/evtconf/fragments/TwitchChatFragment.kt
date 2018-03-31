@@ -13,11 +13,11 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Switch
 import com.github.viktorpenelski.evtconf.R
 import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
+import kotlinx.android.synthetic.main.fragment_twitch_chat.*
+import kotlinx.android.synthetic.main.fragment_twitch_chat.view.*
 
 
 /**
@@ -29,20 +29,20 @@ class TwitchChatFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_twitch_chat, container, false)
-        initializeTwitchSwitch(view.findViewById(R.id.twitch_switch))
-        initializeOpenTwitchButton(view.findViewById(R.id.open_external_twitch_button))
+        initializeTwitchSwitch(view.twitch_switch)
+        initializeOpenTwitchButton(view.open_external_twitch_button)
         return view
     }
 
     private fun initializeTwitchSwitch(switch: Switch) {
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (!isChecked) {
-                activity.findViewById<FrameLayout>(R.id.twitch_webview_container).visibility = View.INVISIBLE
-                activity.findViewById<ProgressBar>(R.id.twitch_progress_bar).visibility = View.GONE
+                twitch_webview_container.visibility = View.INVISIBLE
+                twitch_progress_bar.visibility = View.GONE
                 destroyWebView()
             } else {
                 initializeWebView()
-                activity.findViewById<FrameLayout>(R.id.twitch_webview_container).visibility = View.VISIBLE
+                twitch_webview_container.visibility = View.VISIBLE
             }
         }
     }
@@ -62,7 +62,7 @@ class TwitchChatFragment : Fragment() {
     private fun destroyWebView() {
         val view = activity.findViewById<WebView>(R.id.twitch_webview) ?: return
 
-        activity.findViewById<FrameLayout>(R.id.twitch_webview_container).removeAllViews()
+        twitch_webview_container.removeAllViews()
         view.clearHistory()
         view.clearCache(false)
         view.loadUrl("about:blank")
@@ -74,7 +74,7 @@ class TwitchChatFragment : Fragment() {
 
     private fun initializeWebView() {
 
-        val layout = activity.findViewById<FrameLayout>(R.id.twitch_webview_container)
+        val layout = twitch_webview_container
 
         val webView = WebView(context).apply {
             id = R.id.twitch_webview
@@ -94,12 +94,10 @@ class TwitchChatFragment : Fragment() {
             }
             it.webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    val progressBar = activity.findViewById<ProgressBar>(R.id.twitch_progress_bar)
-
-                    if (newProgress < 100 && View.GONE.equals(progressBar.visibility)) {
-                        progressBar.visibility = View.VISIBLE
+                    if (newProgress < 100 && View.GONE.equals(twitch_progress_bar.visibility)) {
+                        twitch_progress_bar.visibility = View.VISIBLE
                     } else if (newProgress >= 100) {
-                        progressBar.visibility = View.GONE
+                        twitch_progress_bar.visibility = View.GONE
                     }
 
                 }

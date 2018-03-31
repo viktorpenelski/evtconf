@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.github.viktorpenelski.evtconf.R
+import kotlinx.android.synthetic.main.main_stage_entry_list_row.view.*
 
 
 /**
@@ -21,10 +22,11 @@ class MainStageEntryListAdapter(private var activity: Activity, private var main
     : BaseAdapter() {
 
     private class ViewHolder(row: View) {
-        var txtTime = row.findViewById(R.id.txtTime) as TextView
-        var txtTitle = row.findViewById(R.id.txtTitle) as TextView
-        var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
-        var imgLink = row.findViewById<View>(R.id.main_stage_img_link) as ImageView
+
+        var txtTime: TextView = row.txtTime
+        var txtTitle: TextView = row.txtTitle
+        var imgLogo: SimpleDraweeView = row.imgLogo
+        var imgLink: ImageView = row.main_stage_img_link
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

@@ -22,8 +22,10 @@ __NOTE2:__ the app is currently branded for a particular event happening on 24th
 
 ### TODO:
 
-* Extract hard-coded variables into properties
-* Figure out QR code installation of the app
+* bugfixes from google play console crashes
+* add kotlin coroutines (https://github.com/Kotlin/kotlinx.coroutines/blob/master/ui/coroutines-guide-ui.md)
+* refactor downstream communication to be on separate layer
+* add google analytics sdk
 
 ### Improvements / Bugs:
 

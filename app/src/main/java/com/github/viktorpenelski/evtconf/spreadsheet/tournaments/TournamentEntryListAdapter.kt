@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.github.viktorpenelski.evtconf.R
+import kotlinx.android.synthetic.main.tournament_entry_list_row.view.*
 
 
 /**
@@ -21,9 +22,9 @@ class TournamentEntryListAdapter(private var activity: Activity, private var ent
     : BaseAdapter() {
 
     private class ViewHolder(row: View) {
-        var txtTitle = row.findViewById(R.id.txtTitle) as TextView
-        var imgLogo = row.findViewById<View>(R.id.imgLogo) as SimpleDraweeView
-        var linkView = row.findViewById<LinearLayout>(R.id.tournament_link_container)
+        var txtTitle: TextView = row.txtTitle
+        var imgLogo: SimpleDraweeView = row.imgLogo
+        var linkView: LinearLayout = row.tournament_link_container
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

@@ -4,13 +4,11 @@ package com.github.viktorpenelski.evtconf.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.AdapterView
-import android.widget.ListView
 import com.github.viktorpenelski.evtconf.R
 import com.github.viktorpenelski.evtconf.WebViewActivity
 import com.github.viktorpenelski.evtconf.spreadsheet.GetGoogleSpreadsheetTask
@@ -18,6 +16,7 @@ import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
 import com.github.viktorpenelski.evtconf.spreadsheet.tournaments.TournamentEntryListAdapter
 import com.github.viktorpenelski.evtconf.spreadsheet.tournaments.TournamentSpreadsheetEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.tournaments.TournamentSpreadsheetEntryCache
+import kotlinx.android.synthetic.main.base_fragment_refreshable_list_view.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -37,7 +36,7 @@ class TournamentFragment : Fragment() {
     }
 
     private fun initializeListViewOnItemClickListener(view: View) {
-        view.findViewById<ListView>(R.id.list_view).apply {
+        view.list_view.apply {
             onItemClickListener = object : AdapterView.OnItemClickListener {
 
                 override fun onItemClick(adapter: AdapterView<*>, arg1: View, position: Int, arg3: Long) {
@@ -54,7 +53,7 @@ class TournamentFragment : Fragment() {
     }
 
     private fun initializeSwipeToRefresh(view: View) {
-        view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+        view.swiperefresh.apply {
 
             /*
              * Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
@@ -69,13 +68,13 @@ class TournamentFragment : Fragment() {
     private fun loadListView(view: View, forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask<TournamentSpreadsheetEntryCache, TournamentSpreadsheetEntry>(object : OnEntriesFetched<TournamentSpreadsheetEntry> {
             override fun onEntriesFetched(entries: List<TournamentSpreadsheetEntry>) {
-                view.findViewById<ListView>(R.id.list_view).apply {
+                view.list_view.apply {
                     adapter = TournamentEntryListAdapter(activity, entries)
                 }
             }
         }, forceRefresh).execute(TournamentSpreadsheetEntryCache.INSTANCE)
 
-        view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh).apply {
+        view.swiperefresh.apply {
             isRefreshing = false
         }
 

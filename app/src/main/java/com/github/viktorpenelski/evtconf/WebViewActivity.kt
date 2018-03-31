@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.webview.*
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -12,7 +14,7 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.webview)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -39,7 +41,7 @@ class WebViewActivity : AppCompatActivity() {
      */
     private fun initializeWebView(): WebView {
 
-        return findViewById<WebView>(R.id.webview).apply {
+        return webview.apply {
             enableZoom()
             configureUserAgent()
             configureJavaScriptEnabled()
