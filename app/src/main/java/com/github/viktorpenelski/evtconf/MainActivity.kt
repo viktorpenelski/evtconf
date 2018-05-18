@@ -76,6 +76,9 @@ class MainActivity : AppCompatActivity() {
     private fun loadSettings(forceRefresh: Boolean = false) {
         GetGoogleSpreadsheetTask<SettingsEntryCache, SettingsEntry>(object : OnEntriesFetched<SettingsEntry> {
             override fun onEntriesFetched(entries: List<SettingsEntry>) {
+
+                toolbar.title = RemoteSettings.INSTANCE.getTitleMain()
+
                 main_top_text.apply {
                     val topMessage = RemoteSettings.INSTANCE.getTopMessage()
                     if (topMessage.isNotBlank()) {

@@ -47,6 +47,17 @@ class RemoteSettings private constructor() {
 
     }
 
+    fun getTitleMain(): String {
+        val entries = cache.retrieveEntries()
+
+        return if (entries.isEmpty() || entries[0].eventMapUrl.isEmpty()) {
+            EvtConfApplication.getContext().getString(R.string.title_default)
+        } else {
+            entries[0].titleMain
+        }
+
+    }
+
 
     private object Holder {
         val INSTANCE = RemoteSettings()
