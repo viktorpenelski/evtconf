@@ -2,7 +2,9 @@ package com.github.viktorpenelski.evtconf
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,13 +14,18 @@ import com.github.viktorpenelski.evtconf.spreadsheet.OnEntriesFetched
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntry
 import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.SettingsEntryCache
 import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mFirebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         setContentView(R.layout.activity_main)
@@ -34,6 +41,21 @@ class MainActivity : AppCompatActivity() {
         }
         // Give the TabLayout the ViewPager
         sliding_tabs.setupWithViewPager(viewpager)
+
+        sliding_tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                mFirebaseAnalytics.setCurrentScreen(this@MainActivity, tab?.text.toString(), null)
+
+            }
+        })
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,6 +72,8 @@ class MainActivity : AppCompatActivity() {
                 if (mapUrl.isBlank()) {
                     return false
                 }
+
+                mFirebaseAnalytics.setCurrentScreen(this@MainActivity, "MAP BUTTON", null)
 
                 val intent = Intent(this@MainActivity, WebViewActivity::class.java).apply {
                     putExtra(WebViewActivity.EXTRAS_URL, mapUrl)
