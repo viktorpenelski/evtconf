@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.webview.*
@@ -18,6 +19,8 @@ class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.webview)
+
+        toolbar.title = RemoteSettings.INSTANCE.getTitleMain()
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
