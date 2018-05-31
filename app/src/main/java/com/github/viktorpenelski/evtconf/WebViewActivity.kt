@@ -6,15 +6,10 @@ import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.github.viktorpenelski.evtconf.spreadsheet.settings.RemoteSettings
-import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.webview.*
 
-
 class WebViewActivity : AppCompatActivity() {
-
-    lateinit var mFirebaseAnalytics: FirebaseAnalytics
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,22 +17,12 @@ class WebViewActivity : AppCompatActivity() {
 
         toolbar.title = RemoteSettings.INSTANCE.getTitleMain()
 
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val intentUrl = intent.extras.getString(EXTRAS_URL)
-
-        //log firebase analytics event
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, intentUrl)
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "external_url")
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle)
-
         initializeWebView().apply {
-            loadUrl(intentUrl)
+            loadUrl(intent.extras.getString(EXTRAS_URL))
         }
     }
 

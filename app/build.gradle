@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.facebook.fresco:fresco:1.8.1'
-    implementation 'com.google.firebase:firebase-core:11.8.0'
     apply plugin: 'kotlin-android-extensions'
 
     testImplementation 'junit:junit:4.12'
@@ -46,5 +45,3 @@ repositories {
         url 'https://repo.spring.io/libs-milestone'
     }
 }
-
-apply plugin: 'com.google.gms.google-services'
