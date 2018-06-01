@@ -95,15 +95,16 @@ class TwitchChatFragment : Fragment() {
             it.webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
 
-                    if (newProgress < 100 && View.GONE.equals(twitch_progress_bar?.visibility)) {
-                        twitch_progress_bar.visibility = View.VISIBLE
-                    } else if (newProgress >= 100) {
-                        twitch_progress_bar.visibility = View.GONE
+                    twitch_progress_bar?.apply {
+                        if (newProgress < 100 && View.GONE.equals(visibility)) {
+                            visibility = View.VISIBLE
+                        } else if (newProgress >= 100) {
+                            visibility = View.GONE
+                        }
                     }
 
                 }
             }
-
 
         }.apply {
             loadUrl("https://www.twitch.tv/popout/${RemoteSettings.INSTANCE.getTwitchChannel()}/chat")
