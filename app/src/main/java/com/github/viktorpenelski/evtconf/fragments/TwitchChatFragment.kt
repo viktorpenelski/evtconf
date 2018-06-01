@@ -94,7 +94,8 @@ class TwitchChatFragment : Fragment() {
             }
             it.webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    if (newProgress < 100 && View.GONE.equals(twitch_progress_bar.visibility)) {
+
+                    if (newProgress < 100 && View.GONE.equals(twitch_progress_bar?.visibility)) {
                         twitch_progress_bar.visibility = View.VISIBLE
                     } else if (newProgress >= 100) {
                         twitch_progress_bar.visibility = View.GONE
