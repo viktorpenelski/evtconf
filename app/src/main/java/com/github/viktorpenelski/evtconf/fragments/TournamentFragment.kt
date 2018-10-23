@@ -19,7 +19,10 @@ import com.github.viktorpenelski.evtconf.spreadsheet.tournaments.TournamentSprea
 import kotlinx.android.synthetic.main.base_fragment_refreshable_list_view.view.*
 
 /**
- * A simple [Fragment] subclass.
+ * Tournaments tab.
+ *
+ * Represents the view of all active tournaments for a given event, usually accompanied with
+ * links to their respective brackets.
  */
 class TournamentFragment : Fragment() {
 

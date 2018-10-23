@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_twitch_chat.view.*
 
 
 /**
- * A simple [Fragment] subclass.
+ * Represents a view of twitch chat in-app.
  */
 class TwitchChatFragment : Fragment() {
 

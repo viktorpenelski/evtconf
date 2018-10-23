@@ -19,7 +19,9 @@ import com.github.viktorpenelski.evtconf.spreadsheet.mainstage.MainStageSpreadsh
 import kotlinx.android.synthetic.main.base_fragment_refreshable_list_view.view.*
 
 /**
- * A simple [Fragment] subclass.
+ * First fragment visible ot user.
+ *
+ * Represents a timeline of the event.
  */
 class MainScheduleFragment : Fragment() {
 

@@ -14,7 +14,7 @@ Since the project is written in kotlin, porting to iOS (if I get my hands on an 
 and/or having a backend should there be a need, will not be part of the initial release, 
 but will definitely be planned for in the future.
 
-__NOTE2:__ the app is currently branded for a particular event happening on 24th and 25th of March 2018.
+__NOTE2:__ the app is currently "branded" for an organization called GPlay.
 
 
 
@@ -23,9 +23,7 @@ __NOTE2:__ the app is currently branded for a particular event happening on 24th
 ### TODO:
 
 * bugfixes from google play console crashes
-* add kotlin coroutines (https://github.com/Kotlin/kotlinx.coroutines/blob/master/ui/coroutines-guide-ui.md)
-* refactor downstream communication to be on separate layer
-* add google analytics sdk
+* add kotlin coroutines (1.3 stable :) (https://github.com/Kotlin/kotlinx.coroutines/blob/master/ui/coroutines-guide-ui.md)
 
 ### Improvements / Bugs:
 
