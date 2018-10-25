@@ -35,7 +35,7 @@ class TwitchChatFragment : Fragment() {
     }
 
     private fun initializeTwitchSwitch(switch: Switch) {
-        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        switch.setOnCheckedChangeListener { _, isChecked ->
             if (!isChecked) {
                 twitch_webview_container.visibility = View.INVISIBLE
                 twitch_progress_bar.visibility = View.GONE
@@ -60,7 +60,7 @@ class TwitchChatFragment : Fragment() {
     }
 
     private fun destroyWebView() {
-        val view = activity.findViewById<WebView>(R.id.twitch_webview) ?: return
+        val view = activity?.findViewById<WebView>(R.id.twitch_webview) ?: return
 
         twitch_webview_container.removeAllViews()
         view.clearHistory()
@@ -116,7 +116,7 @@ class TwitchChatFragment : Fragment() {
 
     private fun getTwitchUrl(): String {
         return try {
-            context.packageManager.getPackageInfo("tv.twitch.android.app", PackageManager.GET_ACTIVITIES)
+            context?.packageManager?.getPackageInfo("tv.twitch.android.app", PackageManager.GET_ACTIVITIES)
             "twitch://stream/${RemoteSettings.INSTANCE.getTwitchChannel()}"
         } catch (e: PackageManager.NameNotFoundException) {
             "https://m.twitch.tv/${RemoteSettings.INSTANCE.getTwitchChannel()}"

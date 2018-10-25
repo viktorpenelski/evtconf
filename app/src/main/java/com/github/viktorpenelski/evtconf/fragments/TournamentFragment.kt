@@ -72,7 +72,7 @@ class TournamentFragment : Fragment() {
         GetGoogleSpreadsheetTask<TournamentSpreadsheetEntryCache, TournamentSpreadsheetEntry>(object : OnEntriesFetched<TournamentSpreadsheetEntry> {
             override fun onEntriesFetched(entries: List<TournamentSpreadsheetEntry>) {
                 view.list_view.apply {
-                    adapter = TournamentEntryListAdapter(activity, entries)
+                    adapter = TournamentEntryListAdapter(activity!!, entries)
                 }
             }
         }, forceRefresh).execute(TournamentSpreadsheetEntryCache.INSTANCE)

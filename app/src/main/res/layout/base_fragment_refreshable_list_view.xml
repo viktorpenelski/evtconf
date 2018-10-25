@@ -14,12 +14,13 @@
         android:orientation="vertical">
 
         <ListView
+            tools:listitem="@layout/main_stage_entry_list_row"
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            android:divider="@color/colorPrimaryLight"
-            android:dividerHeight="0.5dp"/>
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

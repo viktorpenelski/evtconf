@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             fresco:actualImageScaleType="fitCenter"
-            fresco:placeholderImage="@drawable/twitchtv_logo" />
+            fresco:placeholderImage="@drawable/twitchtv_logo"
+            tools:background="@drawable/gplaytvlogo" />
 
     </LinearLayout>
 
@@ -34,8 +35,8 @@
             android:id="@+id/txtTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@color/colorSecondaryDark"
+            android:textStyle="bold"
             tools:text="10:30" />
 
         <LinearLayout
@@ -46,30 +47,36 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="sans"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_weight="0.9"
                 tools:text="Foo" />
 
             <ImageView
                 android:id="@+id/main_stage_img_link"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1"
                 android:layout_gravity="end|bottom"
-                android:paddingStart="5dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/link_available"
                 android:paddingEnd="5dp"
-                android:src="@drawable/link"
+                android:paddingStart="5dp"
+                android:scaleType="center"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
-                android:scaleType="center"
+                android:src="@drawable/link"
                 android:tint="@color/colorSecondaryDark"
-                android:contentDescription="@string/link_available" />
+                android:visibility="invisible" />
+
 
         </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryLight" />
 
     </LinearLayout>
 

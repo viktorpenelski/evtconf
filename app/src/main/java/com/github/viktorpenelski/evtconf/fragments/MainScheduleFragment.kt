@@ -70,7 +70,7 @@ class MainScheduleFragment : Fragment() {
         GetGoogleSpreadsheetTask<MainStageSpreadsheetEntryCache, MainStageSpreadsheetEntry>(object : OnEntriesFetched<MainStageSpreadsheetEntry> {
             override fun onEntriesFetched(entries: List<MainStageSpreadsheetEntry>) {
                 view.list_view.apply {
-                    adapter = MainStageEntryListAdapter(activity, entries)
+                    adapter = MainStageEntryListAdapter(activity!!, entries)
                 }
             }
         }, forceRefresh).execute(MainStageSpreadsheetEntryCache.INSTANCE)

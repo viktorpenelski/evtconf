@@ -1,4 +1,22 @@
-#### Version 1.3
+#### Version 1.3.3
+
+* Screen is now locked in portrait mode.
+* Minor UI adjustments (custom separator between list items).
+* Bumped targeted SDK version to 27, alongside dependencies.
+
+#### Version 1.3.2
+
+* fixed a bug, where if user was using web_view inside twitch_chat_fragment, the loading bar could crash.
+
+#### Version 1.3.1
+
+* app title can now be dynamically added via setting.
+
+#### Version 1.3.1
+
+* app title can now be dynamically added via setting.
+
+## Version 1.3
 
 * added fade in / fade out transitions between activities
 * improved quality of map action icon
