@@ -1,8 +1,10 @@
-#### Version 1.3.3
+#### Version 1.3.4
 
 * Screen is now locked in portrait mode.
 * Minor UI adjustments (custom separator between list items).
 * Bumped targeted SDK version to 27, alongside dependencies.
+* Bumped kotlin version from 1.2.41 to 1.2.71
+* Bumped gradle wrapper version from 4.4 to 4.6
 
 #### Version 1.3.2
 
